@@ -839,10 +839,12 @@ class descriptionstuff():
                         '''
                     if part == "grassy_field" and beento["grassy_field"] == 0:
                         print(fill(indent('You awaken in a grassy field surrounded by mountains. You have no idea who you are or how you got here.\n')))
+                        print('')
+                        print(fill(indent('There looks to be a mineshaft in the distance, tunneling into one of the mountains, to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.')))
                         beento["grassy_field"] = 1
                         
-                    if part == "grassy_field":
-                        print(fill(indent('There looks to be a mineshaft far off into the distance, tunneling into one of the mountains, to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.')))
+                    elif part == "grassy_field":
+                        print(fill(indent('There looks to be a mineshaft in the distance to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.')))
                     
                     if part == "forestpart1":
                         print(fill(indent('You walk into a forest.')))
@@ -881,15 +883,15 @@ class descriptionstuff():
                         print(fill(indent('You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.')))
                     
                     if part == "cavepart1" and beento["cavepart1"] == 0:
-                        print(fill(indent('You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although their is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.')))
+                        print(fill(indent('You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although there is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel, go west.')))
                         beento["cavepart1"] = 1
                     elif part == "cavepart1":
-                        print(fill(indent('You are in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. There is a strong smell of sulfur and decaying meat. If you decide to go further into the tunnel like cave, go west.')))
+                        print(fill(indent('You are in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. There is a strong smell of sulfur and decaying meat. If you decide to go further into the tunnel, go west.')))
                     
                     if part == "cavepart2" and beento["cavepart2"] == 0:
                         print(fill(indent('As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right.')))
                         print('')
-                        print(fill(indent('You at this moment notice the left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky almost as if your mind has lost the ability to perceive slopes, spheres or angles. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.')))
+                        print(fill(indent('You at this moment notice the left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky. Almost as if your mind has lost the ability to perceive slopes, spheres or angles. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.')))
                         print('')
                         print(fill(indent('The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel. He seems to be scratching a metal spoon against the wall and muttering something inaudible from where you are.')))
                         beento["cavepart2"] = 1
@@ -933,7 +935,7 @@ class descriptionstuff():
                         print('  You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.')
                     
                     if part == "cavepart1" and beento["cavepart1"] == 0:
-                        print('  You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although their is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.')
+                        print('  You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although there is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.')
                         beento["cavepart1"] = 1
                         
                     elif part == "cavepart1":
@@ -1972,8 +1974,8 @@ def yesorno():
     global defencepoints
     global questlist
     
-    yesnodict = set(["yes", "yas", "y", "no", "nah", "n"])
-    yesdict = set(["yes", "yas", "y"])
+    yesnodict = set(["yes", "yas", "ye", "y", "no", "nah", "n"])
+    yesdict = set(["yes", "yas", "ye", "y"])
     nodict = set(["no", "nah"])
     #Determines if a yes or no question has been asked and if a valid yes or
     #no answer has been given
