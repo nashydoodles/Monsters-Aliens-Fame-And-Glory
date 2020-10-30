@@ -15,13 +15,19 @@ cavepart2:
 
 CAVE
   As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right.
+
   You at this moment notice the left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky almost as if your mind has lost the ability to perceive slopes, spheres or angles. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.
-  The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel.
+
+  The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel. He seems to be scratching a metal spoon against the wall and muttering something inaudible from where you are.
+
 
 CAVE
   You stand at a branching split in the cave where there are two tunnels, one to the left and one to the right.
+
   The left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.
-  The right tunnel is still pitch black. The imp is minding his own business facing the right wall blocking that tunnel path.
+
+  The right tunnel is still pitch black. The imp is minding his own business facing the right wall blocking that path.
+
 
 
 

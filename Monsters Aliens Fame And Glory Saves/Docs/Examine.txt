@@ -1,0 +1,6 @@
+examine descriptions:
+
+GRASSY FIELD
+
+grass, field, brush
+  There seems to be purple particles emanating from the grass.

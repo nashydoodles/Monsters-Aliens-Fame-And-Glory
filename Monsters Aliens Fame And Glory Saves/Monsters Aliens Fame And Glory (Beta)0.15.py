@@ -517,7 +517,7 @@ lockeddoors = {"cabin_front_door":1, "cabin_attic_hatch":1}
 changableobjects = {"lit_cabin_fireplace":1, "cabin_upstairs_bedroom_key_on_table":1, "ladder_on_side_of_cabin":1, "cabin_attic_ladder_placed":1}
 beento = {"grassy_field":0, "cavepart1":0, "cavepart2":0}
 enemiesalive = {"cavepart2_r1_imp": 1}
-npcstats = {"health_cavepart2_r1_imp": 10, "attack_cavepart2_r1_imp": 2, "defence_cavepart2_r1_imp": 1}
+npc_stats = {"health_cavepart2_r1_imp": 10, "attack_cavepart2_r1_imp": 2, "defence_cavepart2_r1_imp": 1}
 paratype = 1
 developermode = 0
 healthpoints = 20
@@ -891,14 +891,14 @@ class descriptionstuff():
                         print('')
                         print(fill(indent('You at this moment notice the left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky almost as if your mind has lost the ability to perceive slopes, spheres or angles. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.')))
                         print('')
-                        print(fill(indent('The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel.')))
+                        print(fill(indent('The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel. He seems to be scratching a metal spoon against the wall and muttering something inaudible from where you are.')))
                         beento["cavepart2"] = 1
                     elif part == "cavepart2":
                         print(fill(indent('You stand at a branching split in the cave where there are two tunnels, one to the left and one to the right.')))
                         print('')
                         print(fill(indent('The left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.')))
                         print('')
-                        print(fill(indent('The right tunnel is still pitch black. The imp is minding his own business facing the right wall blocking that tunnel path.')))
+                        print(fill(indent('The right tunnel is still pitch black. The imp is minding his own business facing the right wall blocking that path.')))
                     
                     if part == "cavepart2_l1":
                         print(fill(indent('You decide to travel down the left tunnel which eventually starts too open up into a large room filled with mine carts and bright block like torches. You also notice people but they aren\'t normal people, NO! They are all blocky, their arms, their legs, even their heads!')))
@@ -993,6 +993,7 @@ def save():
     global changableobjects
     global beento
     global enemiesalive
+    global npc_stats
     global paratype
     global developermode
     if "save" in actiontype:
@@ -1017,7 +1018,10 @@ def save():
         saveenemiesalive = " "
         for key in enemiesalive:
             saveenemiesalive = saveenemiesalive + str(key) + ":" + str(enemiesalive[key]) + " "
-        savefile = {savesettings:0, savepart:1, saveplacesdiscovered:2, saveinventory:3, savelockeddoors:4, savechangableobjects:5, savebeento:6, saveenemiesalive:7}
+        save_npc_stats = " "
+        for key in npc_stats:
+            save_npc_stats = save_npc_stats + str(key) + ":" + str(npc_stats[key]) + " "
+        savefile = {savesettings:0, savepart:1, saveplacesdiscovered:2, saveinventory:3, savelockeddoors:4, savechangableobjects:5, savebeento:6, saveenemiesalive:7, save_npc_stats:8}
         print("")
         print("Type:")
         print("")
@@ -1126,6 +1130,17 @@ def load():
                 enemiesalive[word[:index3]] = int(word[index3 + 1:])
             # print(enemiesalive)
             
+            #Loads npc stats
+            index = action.find("': 7")
+            index2 = action.find("': 8")
+            action2 = action[index + 8:index2]
+            npc_stats = {}    
+            for index, word in enumerate(action2.split()):
+                index3 = word.find(":")
+                npc_stats[word[:index3]] = int(word[index3 + 1:])
+            # print(npc_stats)
+            
+            
             print(">You loaded the game from your savefile.")
             description = 1
             done = 1
@@ -1141,7 +1156,7 @@ def examine():
     global description
     global done
     global yesornoaction
-    global npcstats
+    global npc_stats
     #Determines if the action is a examine command
     '''
     if ("examine" in action) or (action.find("x") == 0) or ("describe" in action):
@@ -1163,48 +1178,48 @@ def examine():
     if "examine" in actiontype:
         if part == "grassy_field":
             if action == "grass" or action == "field" or action == "brush":
-                print(" There seems to be purple particles emanating from the grass.")
+                print(fill("There seems to be purple particles emanating from the grass."))
             elif action in mineshaftdict:
-                print(" You would have to get closer to see it.")
+                print(fill("You would have to get closer to see it."))
             else:
-                print(" We don't know what you are trying to examine.")
+                print(fill("We don't know what you are trying to examine."))
         elif part == "cabin_living_room":
             if action in fireplacedict:
-                print('It seems odd that fireplace was lit before you got here.')
+                print(fill('It seems odd that fireplace was lit before you got here.'))
             elif action == "table" or action == "dining table":
-                print("You notice a key on the table.")
+                print(fill("You notice a key on the table."))
             else:
-                print(" We don't know what you are trying to examine.")
+                print(fill("We don't know what you are trying to examine."))
         elif part == "cabin_1st_floor_bathroom":
             if action == "shower":
-                print("The shower curtains appear to be closed. You can see a silhouette of a person behind the curtain.")
+                print(fill("The shower curtains appear to be closed. You can see a silhouette of a person behind the curtain."))
             else:
-                print(" We don't know what you are trying to examine.")
+                print(fill("We don't know what you are trying to examine."))
         elif part == "cavepart1":
             if action == "light" or action == "feint light" or action == "glow" or action == "feint glow" or action == "glowing light":
                 if paratype == 1:
-                    print(fill(" The feint white light continues to grow brighter as you continue down the\ntunnel."))
+                    print(fill("The feint white light continues to grow brighter as you continue down the tunnel."))
                 elif paratype == 2:
                     print(" The feint white light continues to grow brighter as you continue down the tunnel.")
             elif action == "sulfur" or action == "smell of sulfur" or action == "smell sulfur" or action == "sulfur smell":
-                print(" There is a smell of sulfur in the air coming from down the tunnel.")
+                print(fill("There is a smell of sulfur in the air coming from down the tunnel."))
             else:
-                print(" We don't know what you are trying to examine.")
+                print(fill("We don't know what you are trying to examine."))
         elif part == "cavepart2":
             if action == "torch" or action == "flame" or action == "fire" or action == "light":
                 if paratype == 1:
-                    print(" The wood burning torch seems to be perfectly block shaped and the flame\nis red with tiny white sparks flying off and little particles of smoke.")
+                    print(fill("The wood burning torch seems to be perfectly block shaped and the flame is red with tiny white sparks flying off and little particles of smoke."))
                 if paratype == 2:
                     print(" The wood burning torch seems to be perfectly block shaped and the flame is red with tiny white sparks flying off and little particles of smoke.")
             else:
-                print(" We don't know what you are trying to examine.")
+                print(fill("We don't know what you are trying to examine."))
                 
         elif part == "cavepart2_r1":
             if action == "imp":
                 if enemiesalive["cavepart2_r1_imp"] == 1:
-                    print("HP: " + str(npcstats["health_cavepart2_r1_imp"]))
-                    print("Attack: " + str(npcstats["attack_cavepart2_r1_imp"]))
-                    print("Defence: " + str(npcstats["defence_cavepart2_r1_imp"]))
+                    print(fill("HP: " + str(npc_stats["health_cavepart2_r1_imp"])))
+                    print(fill("Attack: " + str(npc_stats["attack_cavepart2_r1_imp"])))
+                    print(fill("Defence: " + str(npc_stats["defence_cavepart2_r1_imp"])))
         else:
             print("There is nothing to examine here.")
         done = 1
@@ -2218,7 +2233,8 @@ def action_of_fight():
     global defencepoints
     global questlist
     
-    print("fude")
+    if part == "cavepart2" and enemiesalive["cavepart2_r1_imp"] == 1:
+        print("fude")
         
 def stats():
     #Makes all the variables in the function global
@@ -2296,15 +2312,15 @@ def takeobject():
     global questlist
     
     def takeobjecterror():
-        print("There is no " + action + " to " + action2 + " here.")
+        print(fill("There is no " + action + " to " + action2 + " here."))
     if "take" in actiontype:
         if action == "key" or action == "key on table":
             if part == "cabin_living_room" and changableobjects["cabin_upstairs_bedroom_key_on_table"] == 1:
                 inventory["cabin_upstairs_bedroom_key"] = 1
                 changableobjects["cabin_upstairs_bedroom_key_on_table"] = 0
-                print("You " + action2 + " the key.")
+                print(fill("You " + action2 + " the key."))
             elif part == "cabin_living_room" and changableobjects["cabin_upstairs_bedroom_key_on_table"] == 0:
-                print("You already picked up the key.")
+                print(fill("You already picked up the key."))
             else:
                 takeobjecterror()
         elif action == "portal gun":
@@ -2316,35 +2332,34 @@ def takeobject():
             else:
                 takeobjecterror()
         elif action == "torch":
-            if inventory["unlit_torch"] == 0 and inventory["lit_torch"] == 0:
-                if action2 == "pick up" and part == "cavepart2":
-                    print(fill("You can only pick up objects sitting on something."))
-                    print(fill("Instead type: >take >snatch >grab"))
+            if action2 == "pick up" and part == "cavepart2_l1":
+                print(fill("You can only pick up objects sitting on something."))
+                print(fill("Instead type: >take >snatch >grab"))
+            elif inventory["unlit_torch"] == 0 and inventory["lit_torch"] == 0:
+                if part == "cavepart2_l1":
+                    inventory["unlit_torch"] = 1
+                    print(fill("As you " + action2 + " the torch of the wall the flame goes out."))
                 else:
-                    if part == "cavepart2":
-                        inventory["unlit_torch"] = 1
-                        print("As you " + action2 + " the torch of the wall the flame goes out.")
-                    else:
-                        takeobjecterror()
+                    takeobjecterror()
             elif inventory["unlit_torch"] == 1 or inventory["lit_torch"] == 1:
-                if action2 == "pick up" and part == "cavepart2":
-                    print(fill("You can only pick up objects sitting on something."))
-                    print(fill("Instead: type >take >snatch >grab"))
-                elif part == "cavepart2":
-                    print("You already have a torch in your inventory.")
+                if part == "cavepart2_l1":
+                    if inventory["lit_torch"] == 1:
+                        print(fill("You already have a lit torch in your inventory."))
+                    elif inventory["unlit_torch"] == 1:
+                        print(fill("You already have a torch in your inventory."))
                 else:
                     takeobjecterror()
         elif action == "ladder":
             if part == "cabin_front":
                 if changableobjects["ladder_on_side_of_cabin"] == 1:
                     if inventory["ladder"] == 1:
-                        print("You already have a " + action + ".")
+                        print(fill("You already have a " + action + "."))
                     elif inventory["ladder"] == 0:
                         changableobjects["ladder_on_side_of_cabin"] = 0
                         inventory["ladder"] = 1
-                        print("You " + action2 + " the " + action + ".")
+                        print(fill("You " + action2 + " the " + action + "."))
                 elif changableobjects["ladder_on_side_of_cabin"] == 0:
-                    print("You already took the " + action + ".")
+                    print(fill("You already took the " + action + "."))
             else:
                 takeobjecterror()
                 
