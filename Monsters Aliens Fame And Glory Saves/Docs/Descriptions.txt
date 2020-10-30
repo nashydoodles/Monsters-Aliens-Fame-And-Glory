@@ -21,8 +21,6 @@ CAVE
   The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel. He seems to be scratching a metal spoon against the wall and muttering something inaudible from where you are.
 
 
-
-
 CAVE
   You stand at a branching split in the cave where there are two tunnels, one to the left and one to the right.
 
