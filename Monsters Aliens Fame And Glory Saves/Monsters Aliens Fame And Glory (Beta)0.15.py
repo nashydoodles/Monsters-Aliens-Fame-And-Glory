@@ -515,7 +515,7 @@ inventory = {"cabin_key":1, "cabin_upstairs_bedroom_key":0, "water_bucket":1, "b
 questlist = {"get_rick_duff_beer": 1, "get_bart_slingshot": 0, "get_bart_skateboard": 0}
 lockeddoors = {"cabin_front_door":1, "cabin_attic_hatch":1}
 changableobjects = {"lit_cabin_fireplace":1, "cabin_upstairs_bedroom_key_on_table":1, "ladder_on_side_of_cabin":1, "cabin_attic_ladder_placed":1}
-beento = {"grassy_field":0, "cavepart1":0}
+beento = {"grassy_field":0, "cavepart1":0, "cavepart2":0}
 enemiesalive = {"cavepart2_r1_imp": 1}
 npcstats = {"health_cavepart2_r1_imp": 10, "attack_cavepart2_r1_imp": 2, "defence_cavepart2_r1_imp": 1}
 paratype = 1
@@ -887,10 +887,18 @@ class descriptionstuff():
                         print(fill(indent('You are in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. There is a strong smell of sulfur and decaying meat. If you decide to go further into the tunnel like cave, go west.')))
                     
                     if part == "cavepart2" and beento["cavepart2"] == 0:
-                        print(fill(indent('You stand at a branching split in the cave where there are two tunnels, one to the left and to the right. You also notice that everything is very block like. There are block like torches pinned to the walls.')))
+                        print(fill(indent('As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right.')))
+                        print('')
+                        print(fill(indent('You at this moment notice the left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky almost as if your mind has lost the ability to perceive slopes, spheres or angles. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.')))
+                        print('')
+                        print(fill(indent('The right tunnel is pitch black. There is an imp minding his own business facing the right wall blocking the path down that tunnel.')))
                         beento["cavepart2"] = 1
-                        
-                        print(fill(indent('As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right. As you decide which way to go you notice something you havent noticed before. Being so caught up in thinking about where the tunnel leads, you look around and notice that everything has become very block like, almost as if your mind has lost the ability to perceive slopes, spheres or angles. You also notice where the light has been coming from this whole time as there are block like torches pinned to the walls.')))
+                    elif part == "cavepart2":
+                        print(fill(indent('You stand at a branching split in the cave where there are two tunnels, one to the left and one to the right.')))
+                        print('')
+                        print(fill(indent('The left tunnel has a purple portal like barrier. On the other side through the portal everything is blocky. You can also see there are block like torches pinned to the side of the cave walls on the other side of the portal.')))
+                        print('')
+                        print(fill(indent('The right tunnel is still pitch black. The imp is minding his own business facing the right wall blocking that tunnel path.')))
                     
                     if part == "cavepart2_l1":
                         print(fill(indent('You decide to travel down the left tunnel which eventually starts too open up into a large room filled with mine carts and bright block like torches. You also notice people but they aren\'t normal people, NO! They are all blocky, their arms, their legs, even their heads!')))
