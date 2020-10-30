@@ -1,0 +1,20 @@
+dialogpart = rick_and_morty_apear_in_attic:
+1: Grab portal gun and run
+  ""
+
+2: Spit in Rick's face
+  "You spit directly into Rick's face for absolutely no reason."
+
+Rick: 
+  "Well thats just rude."
+
+3: Take boy as hostage
+  ""
+
+4: Ask if you can join them
+"Rick:
+  "Well I suppose we could use the help seeing as you've got this far from waking up in Grassy Field."
+
+(You wonder how he knows that)
+
+  "First we *buuurrrbbbb* need to get some duff beeer because *urp* I'm nearly out of boose. It coincedently helps me think. Here hop in this *urp* portal."

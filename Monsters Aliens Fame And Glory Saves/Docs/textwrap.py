@@ -479,12 +479,12 @@ def indent(text, prefix, predicate=None):
             yield (prefix + line if predicate(line) else line)
     return ''.join(prefixed_lines())
 
-'''
+
 if __name__ == "__main__":
     #print dedent("\tfoo\n\tbar")
     #print dedent("  \thello there\n  \t  how are you?")
     print(dedent("Hello there.\n  This is indented."))
-'''
+
 
 
 description = 1
@@ -498,8 +498,7 @@ inventory = {"cabin_key":1, "cabin_upstairs_bedroom_key":0, "water_bucket":1, "b
 lockeddoors = {"cabin_front_door":1}
 changableobjects = {"lit_cabin_fireplace":1}
 beento = {"grassy_field":0, "cavepart1":0}
-paratype = 1
-developermode = 0
+paratype = 2
 
 cabindict = set(["cabin", "log cabin", "creepy log cabin"])
 bathroomdict = set(["bathroom", "bath room", "washroom", "wash room"])
@@ -508,197 +507,12 @@ cabinlivingroomdict = set(["cabin living room", "cabin livingroom", "living room
 grassyfielddict = set(["grassy field", "field", "open field"])
 mineshaftdict = set(["mineshaft", "mine shaft", "mine", "cave", "mine cave"])
 forestdict = set(["forest", "woods", "tree forest"])
-
-floor1dict = set(["1st floor", "1stfloor", "floor 1", "first floor"])
-floor2dict = set(["2nd floor", "2ndfloor", "floor 2", "second floor"])
-floor3dict = set(["3rd floor", "3rdfloor", "floor 3", "third floor"])
-
-gotoupstairsdict = set(["upstairs", "upper floor", "next floor up"])
-gotodownstairsdict = set(["downstairs", "lower floor", "next floor down"])
+gotoupstairsdict = set(["upstairs", "2nd floor", "2ndfloor", "second floor", "upper floor"])
 opepcurtainsdict = set(["pull back curtain", "pull back curtains", "open curtain", "open curtains", "draw back curtain", "draw back curtains"])
 lighttorchonfiredict = set(["light torch on fire", "light torch ablaze", "light torch"])
 fireplacedict = set(["fireplace", "fire place"])
 
 abilities = set(["pick up"])
-
-#Function to print a description of your surroundings when you enter a new location
-def printdescription():
-    #Makes all the variables in the function global
-    global action
-    global part
-    global description
-    global done
-    global yesornoaction
-    #Provides a description of your surroundings when you move into a new place
-    if description > 0:
-        if part == "grassy_field":
-            print('GRASSY FIELD')
-        elif part == "mineshaft_entrance":
-            print('MINESHAFT ENTRANCE')
-        elif part == "cavepart1" or part == "cavepart2":
-            print('CAVE')
-        elif part == "forestpart1" or part == "forestpart2":
-            print('FOREST')
-        elif part == "cabin_front" or part == "cabin_living_room" or part == "cabin_1st_floor_bathroom" or part == "cabin_1st_floor_bedroom" or part == "cabin_2nd_floor_bedroom_connecter":
-            print('CABIN')
-        '''
-        elif part == "cabin_living_room":
-            print('CABIN')
-            print('-LIVING ROOM')
-        '''
-        if paratype == 1:
-            if description == 1:
-                '''
-                if part == "grassy_field" and beento["grassy_field"] == 0:
-                    print('  You awaken in a grassy field surrounded by mountains. You have\nno idea who you are or how you got here.\n')
-                    beento["grassy_field"] = 1
-                    
-                if part == "grassy_field":
-                    print('  There looks to be a mineshaft far off into the distance,\ntunneling into one of the mountains, to the west. There is also\na creepy old looking log cabin to the south east and a forest\nto the north.')
-                
-                if part == "forestpart1":
-                    print('  You walk into a forest.')
-                
-                if part == "cabin_front":
-                    print('  You stand at the front entrance of the creepy log cabin.')
-                
-                if part == "cabin_living_room":
-                    print('  In the living room there is a table in the middle and a lit\nfireplace.')
-                
-                if part == "cabin_1st_floor_bathroom":
-                    print('  You enter the bathroom.')
-                    
-                if part == "cabin_2nd_floor_bedroom_connecter":
-                    print('  You go upstairs and come to a hallway bedroom connecter. You\nnotice several closed doors, a bedroom door, a bathroom door,\nand a attic hatch on the ceiling.')
-                    
-                if part == "mineshaft_entrance":
-                    print('  You stand at the entrance to the mineshaft. All you can see is\ndarkness, and you smell the strong stench of sulfur emanating\nfrom the cave.')
-                
-                if part == "cavepart1" and beento["cavepart1"] == 0:
-                    print('  You are now in the pitch black cave. You are surrounded by\ndarkness, but there is a faint light coming from down the\ntunnel. The smell of sulfur has gotten stronger although their\nis now a new stench, it smells of decaying meat. If you decide\nto go further into the tunnel like cave, go west.')
-                    beento["cavepart1"] = 1
-                    
-                elif part == "cavepart1":
-                    print('  You are in the pitch black cave. You are surrounded by\ndarkness, but there is a faint light coming from down the\ntunnel. There is a strong smell of sulfur and decaying meat. If\nyou decide to go further into the tunnel like cave, go west.')
-                
-                if part == "cavepart2":
-                    print('  As you continue further into the cave the potent smells\ncontinue to get stronger and stronger, however the light at the\nend of the tunnel proceeds to grow brighter. Eventually you\ncome to a branching split in the cave where there are two\ntunnels, one to the left and one to the right. As you decide\nwhich way to go you notice something you havent noticed before.\nBeing so caught up in thinking about where the tunnel leads,\nyou look around and notice that everything as become very block\nlike, almost as if your mind has lost the ability to perceive\nslopes, spheres or angles. You also notice where the light has\nbeen coming from this whole time as there is an also block like\ntorch pinned to the wall between the two branching paths.')
-                
-                if part == "cavepart2_l1":
-                    print('  You decide to travel down the left tunnel which eventually\nstarts too open up into a large room filled with mine carts and\nbright block like torches. You also notice people but they\naren\'t normal people, NO! They are all blocky, their arms,\ntheir legs, even their heads!')
-                    '''
-                if part == "grassy_field" and beento["grassy_field"] == 0:
-                    print(fill('  You awaken in a grassy field surrounded by mountains. You have no idea who you are or how you got here.\n'))
-                    beento["grassy_field"] = 1
-                    
-                if part == "grassy_field":
-                    print(fill('  There looks to be a mineshaft far off into the distance, tunneling into one of the mountains, to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.'))
-                
-                if part == "forestpart1":
-                    print(fill('  You walk into a forest.'))
-                
-                if part == "cabin_front":
-                    print(fill('  You stand at the front entrance of the creepy log cabin.'))
-                
-                if part == "cabin_living_room":
-                    print(fill('  In the living room there is a table in the middle and a lit fireplace.'))
-                
-                if part == "cabin_1st_floor_bathroom":
-                    print(fill('  You enter the bathroom.'))
-                    
-                if part == "cabin_2nd_floor_bedroom_connecter":
-                    print(fill('  You go upstairs and come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, and a attic hatch on the ceiling.'))
-                    
-                if part == "mineshaft_entrance":
-                    print(fill('  You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.'))
-                
-                if part == "cavepart1" and beento["cavepart1"] == 0:
-                    print(fill('  You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although their is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.'))
-                    beento["cavepart1"] = 1
-                    
-                elif part == "cavepart1":
-                    print(fill('  You are in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. There is a strong smell of sulfur and decaying meat. If you decide to go further into the tunnel like cave, go west.'))
-                
-                if part == "cavepart2":
-                    print(fill('  As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right. As you decide which way to go you notice something you havent noticed before. Being so caught up in thinking about where the tunnel leads, you look around and notice that everything as become very block like, almost as if your mind has lost the ability to perceive slopes, spheres or angles. You also notice where the light has been coming from this whole time as there is an also block like torch pinned to the wall between the two branching paths.'))
-                
-                if part == "cavepart2_l1":
-                    print(fill('  You decide to travel down the left tunnel which eventually starts too open up into a large room filled with mine carts and bright block like torches. You also notice people but they aren\'t normal people, NO! They are all blocky, their arms, their legs, even their heads!'))
-                    
-        elif paratype == 2:
-            if description == 1:
-                if part == "grassy_field" and beento["grassy_field"] == 0:
-                    print('  You awaken in a grassy field surrounded by mountains. You have no idea who you are or how you got here.\n')
-                    beento["grassy_field"] = 1
-                    
-                if part == "grassy_field":
-                    print('  There looks to be a mineshaft far off into the distance, tunneling into one of the mountains, to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.')
-                
-                if part == "forestpart1":
-                    print('  You walk into a forest.')
-                
-                if part == "cabin_front":
-                    print('  You stand at the front entrance of the creepy log cabin.')
-                
-                if part == "cabin_living_room":
-                    print('  In the living room there is a table in the middle and a lit fireplace.')
-                
-                if part == "cabin_1st_floor_bathroom":
-                    print('  You enter the bathroom.')
-                    
-                if part == "cabin_2nd_floor_bedroom_connecter":
-                    print('  You go upstairs and come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, and a attic hatch on the ceiling.')
-                    
-                if part == "mineshaft_entrance":
-                    print('  You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.')
-                
-                if part == "cavepart1" and beento["cavepart1"] == 0:
-                    print('  You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although their is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.')
-                    beento["cavepart1"] = 1
-                    
-                elif part == "cavepart1":
-                    print('  You are in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. There is a strong smell of sulfur and decaying meat. If you decide to go further into the tunnel like cave, go west.')
-                
-                if part == "cavepart2":
-                    print('  As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right. As you decide which way to go you notice something you havent noticed before. Being so caught up in thinking about where the tunnel leads, you look around and notice that everything as become very block like, almost as if your mind has lost the ability to perceive slopes, spheres or angles. You also notice where the light has been coming from this whole time as there is an also block like torch pinned to the wall between the two branching paths.')
-                
-                if part == "cavepart2_l1":
-                    print('  You decide to travel down the left tunnel which eventually starts too open up into a large room filled with mine carts and bright block like torches. You also notice people but they aren\'t normal people, NO! They are all blocky, their arms, their legs, even their heads!')
-                    
-        description = 0
-        done = 1
-
-def settings():
-    #Makes all the variables in the function global
-    global action
-    global part
-    global description
-    global done
-    global yesornoaction
-    global paratype
-    global developermode
-    if action == "settings" or action == "list settings":
-        print("Settings:")
-        print(" - paratype = " + str(paratype) + " (default: 1) [1,2]")
-        print(" - developer mode = " + str(developermode) + " (default: 0) [0,1]")
-        done = 1
-    elif action == "paratype = 1":
-        paratype = 1
-        print(" - paratype = " + str(paratype) + " (default: 1) [1,2]")
-        done = 1
-    elif action == "paratype = 2":
-        paratype = 2
-        print(" - paratype = " + str(paratype) + " (default: 1) [1,2]")
-        done = 1
-    elif action == "developer mode = 0":
-        developermode = 0
-        print(" - developer mode = " + str(developermode) + " (default: 0) [0,1]")
-        done = 1
-    elif action == "developer mode = 1":
-        developermode = 1
-        print(" - developer mode = " + str(developermode) + " (default: 0) [0,1]")
-        done = 1
-
 
 def save():
     #Makes all the variables in the function global
@@ -711,13 +525,9 @@ def save():
     global lockeddoors
     global changableobjects
     global beento
-    global paratype
-    global developermode
     if ("save" in action):
         action = action.strip()
         if action == "save":
-            savesettings = " "
-            savesettings = " " + str(paratype) + ":1 " + str(developermode) + ":2 "
             savepart = part
             saveplacesdiscovered = " "
             for item in placesdiscovered:
@@ -734,7 +544,7 @@ def save():
             savebeento = " "
             for key in beento:
                 savebeento = savebeento + str(key) + ":" + str(beento[key]) + " "
-            savefile = {savesettings:0, savepart:1, saveplacesdiscovered:2, saveinventory:3, savelockeddoors:4, savechangableobjects:5, savebeento:6}
+            savefile = {savepart:1, saveplacesdiscovered:2, saveinventory:3, savelockeddoors:4, savechangableobjects:5, savebeento:6}
             print("Type: load " + str(savefile))
             print("In order to load your game.")
             print("You saved the game.")
@@ -751,31 +561,13 @@ def load():
     global lockeddoors
     global changableobjects
     global beento
-    global paratype
-    global developermode
     if ("load" in action):
         action = action.strip()
         action = action[5:]
         if (action[:1] == "{") and (action[-1:] == "}"):
-            #Loads settings
-            index2 = action.find("': 0")
-            action2 = action[3:index2]
-            index = action2.find(":1 ")
-            action2 = action2[:index]
-            paratype = int(action2)
-            
-            index2 = action.find("': 0")
-            action2 = action[3:index2]
-            index2 = action2.find(":2 ")
-            action2 = action2[index + 3:index2]
-            developermode = int(action2)
-            
-            #Loads part
-            index2 = action.find("': 0")
-            index = action.find("': 1")
-            part = action[index2 + 7:index]
-            
             #Loads places discovered
+            index = action.find("': 1")
+            part = action[2:index]
             index2 = action.find("': 2")
             action2 = action[index + 8:index2]
             for index, word in enumerate(action2.split()):
@@ -864,7 +656,7 @@ def examine():
         elif part == "cavepart1":
             if action == "light" or action == "feint light" or action == "glow" or action == "feint glow" or action == "glowing light":
                 if paratype == 1:
-                    print(fill(" The feint white light continues to grow brighter as you continue down the\ntunnel."))
+                    print(" The feint white light continues to grow brighter as you continue down the\ntunnel.")
                 elif paratype == 2:
                     print(" The feint white light continues to grow brighter as you continue down the tunnel.")
             elif action == "sulfur" or action == "smell of sulfur" or action == "smell sulfur" or action == "sulfur smell":
@@ -1000,10 +792,6 @@ def enter():
     global description
     global done
     global yesornoaction
-    
-    def entererror():
-        print('We dont know what your trying to enter.')
-        
     if ("go in" in action) or ("enter" in action):
         #Determines if the action is to go inside
         if "go inside" in action or "go in" in action or "enter" in action or "enter building" in action:
@@ -1021,7 +809,7 @@ def enter():
             elif action[:5] == "go in" or action[:5] == "enter":
                 action = action[6:]
             if action != "" and action != "go inside" and action != "go in" and action != "enter" and action != "enter building" and action not in cabindict and action not in bathroomdict and action not in bedroomdict:
-                entererror()
+                print('We dont know what your trying to enter.')
             elif part == "cabin_front" and action in cabindict and done == 0:
                 if inventory["cabin_key"] == 1 and lockeddoors["cabin_front_door"] == 1:
                     print("You will have to unlock the door first.")
@@ -1052,7 +840,7 @@ def enter():
                             part = "cabin_living_room"
                             description = 1
                     else:
-                        entererror()
+                        print('We dont know what your trying to enter.')
                 elif part == "cabin_living_room":
                     if action in bathroomdict:
                         part = "cabin_1st_floor_bathroom"
@@ -1061,15 +849,16 @@ def enter():
                         part = "cabin_1st_floor_bedroom"
                         description = 1
                     else:
-                        entererror()
+                        print('We dont know what your trying to enter.')
                 elif part == "cabin_1st_floor_bathroom" or part == "cabin_1st_floor_bedroom":
                     if action in cabinlivingroomdict:
                         part = "cabin_living_room"
                         description = 1
                     else:
-                        entererror()
+                        print('We dont know what your trying to enter.')
+                
                 else:
-                    entererror()
+                    print('We dont know what your trying to enter.')
             done = 1                    
 
 def leave():
@@ -1079,10 +868,6 @@ def leave():
     global description
     global done
     global yesornoaction
-    
-    def exiterror():
-        print('We dont know what your trying to exit.')
-
     if ("exit" in action) or ("leave" in action):
         #Determines if the action is to exit room
         if "exit" in action or "leave" in action:
@@ -1097,7 +882,7 @@ def leave():
             elif action[:5] == "leave":
                 action = action[6:]
             if action != "" and action != "exit" and action != "leave" and action not in bathroomdict and action not in bedroomdict:
-                exiterror()
+                print('We dont know what your trying to exit.')
             elif part == "cabin_living_room":
                 if action == "cabin" or action == "main room" or action == "living room":
                     part = "cabin_front"
@@ -1114,20 +899,38 @@ def leave():
                         part = "cabin_front"
                         description = 1
                     else:
-                        exiterror()
+                        print('We dont know what your trying to exit.')
                 elif part == "cabin_1st_floor_bathroom":
                     if action in bathroomdict:
                         part = "cabin_living_room"
                         description = 1
                     else:
-                        exiterror()
+                        print('We dont know what your trying to exit.')
                 else:
-                    exiterror()
-                    
+                    print('We dont know what your trying to exit.')
+                
             '''else:
                 print('You cant go that way!')
                 '''
             done = 1
+
+def goback():
+    #Makes all the variables in the function global
+    global action
+    global part
+    global description
+    global done
+    global yesornoaction
+    if action == "go back":
+        if part == "cavepart1":
+            part = "mineshaft_entrance"
+            description = 1
+        if part == "cavepart2":
+            part = "cavepart1"
+            description = 1
+        if part == "cavepart2_l1" or part == "cavepart2_r1":
+            part = "cavepart2"
+            description = 1
 
 def goto():
     #Makes all the variables in the function global
@@ -1136,10 +939,6 @@ def goto():
     global description
     global done
     global yesornoaction
-    
-    def gotoerror():
-        print("We don't know where your trying to go to.")
-        
     if action[:5] == "go to":
         if action[:5] == "go to":
             action = action [6:]
@@ -1153,14 +952,12 @@ def goto():
             if action in mineshaftdict:
                 part = "mineshaft_entrance"
                 description = 1
-            elif action in forestdict:
+            if action in forestdict:
                 part = "forestpart1"
                 description = 1
-            elif action in cabindict:
+            if action in cabindict:
                 part = "cabin_front"
                 description = 1
-            else:
-                gotoerror()
         elif part == "cabin_living_room":
             if action in bathroomdict:
                 part = "cabin_1st_floor_bathroom"
@@ -1168,40 +965,10 @@ def goto():
             elif action in bedroomdict:
                 part = "cabin_1st_floor_bedroom"
                 description = 1
-            elif action in floor2dict or action in gotoupstairsdict:
+            elif action in gotoupstairsdict:
                 part = "cabin_2nd_floor_bedroom_connecter"
                 description = 1
-            else:
-                gotoerror()
-        elif part == "cabin_2nd_floor_bedroom_connecter":
-            if action in cabinlivingroomdict or action in floor1dict or action in gotodownstairsdict:
-                part = "cabin_living_room"
-                description = 1
-            else:
-                gotoerror()
-        else:
-            gotoerror()
         done = 1
-
-def goback():
-    #Makes all the variables in the function global
-    global action
-    global part
-    global description
-    global done
-    global yesornoaction
-    if action == "go back":
-        if part == "cavepart1":
-            part = "mineshaft_entrance"
-            description = 1
-        elif part == "cavepart2":
-            part = "cavepart1"
-            description = 1
-        elif part == "cavepart2_l1" or part == "cavepart2_r1":
-            part = "cavepart2"
-            description = 1
-        else:
-            print("We don't know what your tring to go back to.")
 
 def goupstairs():
     #Makes all the variables in the function global
@@ -1210,21 +977,18 @@ def goupstairs():
     global description
     global done
     global yesornoaction
-    if action == "go upstairs" or action == "go downstairs":
+    if action == "go upstairs" or action == "go downstairs" or (action[:5] == "go to" and action[6:] in cabinlivingroomdict):
         #Determines if the action is to go inside
         if action == "go upstairs":
             if part == "cabin_living_room":
                 part = "cabin_2nd_floor_bedroom_connecter"
                 description = 1
-            else:
-                print("You can't go upstairs here.")
-        elif action == "go downstairs":
+                done = 1
+        elif action == "go downstairs" or (action[:5] == "go to" and action[6:] in cabinlivingroomdict):
             if part == "cabin_2nd_floor_bedroom_connecter":
                 part = "cabin_living_room"
                 description = 1
-            else:
-                print("You can't go downstairs here.")
-        done = 1
+                done = 1
 
 #Function to check if the action is a unlock command, and then if
 #true, unlocks the specified object/door
@@ -1432,7 +1196,6 @@ def listcommands():
     global yesornoaction
     if action == "list commands":
         print("Commands:")
-        print(" - settings")
         print(" - save")
         print(" - load")
         print(" - list places")
@@ -1440,24 +1203,113 @@ def listcommands():
         print(" - take")
         print(" - unlock")
         done = 1
-
-def listinventory():
+    
+#Function to print a description of your surroundings when you enter a new location
+def printdescription():
     #Makes all the variables in the function global
     global action
     global part
     global description
     global done
     global yesornoaction
-    if action == "list inventory" or action == "show inventory" or action == "open inventory":
-        print("Inventory: ")
-        if inventory["cabin_key"] == 1:
-            print(" - Cabin Key")
-        if inventory["cabin_upstairs_bedroom_key"] == 1:
-            print(" - Upstairs Cabin Bedroom Key")
-        if inventory["water_bucket"] == 1:
-            print(" - Bucket Filled With Water")
-        if inventory["bucket"] == 1:
-            print(" - Bucket")
+    #Provides a description of your surroundings when you move into a new place
+    if description > 0:
+        if part == "grassy_field":
+            print('GRASSY FIELD')
+        elif part == "mineshaft_entrance":
+            print('MINESHAFT ENTRANCE')
+        elif part == "cavepart1" or part == "cavepart2":
+            print('CAVE')
+        elif part == "forestpart1" or part == "forestpart2":
+            print('FOREST')
+        elif part == "cabin_front" or part == "cabin_living_room" or part == "cabin_1st_floor_bathroom" or part == "cabin_1st_floor_bedroom" or part == "cabin_2nd_floor_bedroom_connecter":
+            print('CABIN')
+        '''
+        elif part == "cabin_living_room":
+            print('CABIN')
+            print('-LIVING ROOM')
+        '''
+        if paratype == 1:
+            if description == 1:
+                if part == "grassy_field" and beento["grassy_field"] == 0:
+                    print('  You awaken in a grassy field surrounded by mountains. You have\nno idea who you are or how you got here.\n')
+                    beento["grassy_field"] = 1
+                    
+                if part == "grassy_field":
+                    print('  There looks to be a mineshaft far off into the distance,\ntunneling into one of the mountains, to the west. There is also\na creepy old looking log cabin to the south east and a forest\nto the north.')
+                
+                if part == "forestpart1":
+                    print('  You walk into a forest.')
+                
+                if part == "cabin_front":
+                    print('  You stand at the front entrance of the creepy log cabin.')
+                
+                if part == "cabin_living_room":
+                    print('  In the living room there is a table in the middle and a lit\nfireplace.')
+                
+                if part == "cabin_1st_floor_bathroom":
+                    print('  You enter the bathroom.')
+                    
+                if part == "cabin_2nd_floor_bedroom_connecter":
+                    print('  You go upstairs and come to a hallway bedroom connecter. You\nnotice several closed doors, a bedroom door, a bathroom door,\nand a attic hatch on the ceiling.')
+                    
+                if part == "mineshaft_entrance":
+                    print('  You stand at the entrance to the mineshaft. All you can see is\ndarkness, and you smell the strong stench of sulfur emanating\nfrom the cave.')
+                
+                if part == "cavepart1" and beento["cavepart1"] == 0:
+                    print('  You are now in the pitch black cave. You are surrounded by\ndarkness, but there is a faint light coming from down the\ntunnel. The smell of sulfur has gotten stronger although their\nis now a new stench, it smells of decaying meat. If you decide\nto go further into the tunnel like cave, go west.')
+                    beento["cavepart1"] = 1
+                    
+                elif part == "cavepart1":
+                    print('  You are in the pitch black cave. You are surrounded by\ndarkness, but there is a faint light coming from down the\ntunnel. There is a strong smell of sulfur and decaying meat. If\nyou decide to go further into the tunnel like cave, go west.')
+                
+                if part == "cavepart2":
+                    print('  As you continue further into the cave the potent smells\ncontinue to get stronger and stronger, however the light at the\nend of the tunnel proceeds to grow brighter. Eventually you\ncome to a branching split in the cave where there are two\ntunnels, one to the left and one to the right. As you decide\nwhich way to go you notice something you havent noticed before.\nBeing so caught up in thinking about where the tunnel leads,\nyou look around and notice that everything as become very block\nlike, almost as if your mind has lost the ability to perceive\nslopes, spheres or angles. You also notice where the light has\nbeen coming from this whole time as there is an also block like\ntorch pinned to the wall between the two branching paths.')
+                
+                if part == "cavepart2_l1":
+                    print('  You decide to travel down the left tunnel which eventually\nstarts too open up into a large room filled with mine carts and\nbright block like torches. You also notice people but they\naren\'t normal people, NO! They are all blocky, their arms,\ntheir legs, even their heads!')
+                    
+        elif paratype == 2:
+            if description == 1:
+                if part == "grassy_field" and beento["grassy_field"] == 0:
+                    print(fill('  You awaken in a grassy field surrounded by mountains. You have no idea who you are or how you got here.\n'))
+                    beento["grassy_field"] = 1
+                    
+                if part == "grassy_field":
+                    print(fill('  There looks to be a mineshaft far off into the distance, tunneling into one of the mountains, to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.'))
+                
+                if part == "forestpart1":
+                    print(fill('  You walk into a forest.'))
+                
+                if part == "cabin_front":
+                    print(fill('  You stand at the front entrance of the creepy log cabin.'))
+                
+                if part == "cabin_living_room":
+                    print(fill('  In the living room there is a table in the middle and a lit fireplace.'))
+                
+                if part == "cabin_1st_floor_bathroom":
+                    print(fill('  You enter the bathroom.'))
+                    
+                if part == "cabin_2nd_floor_bedroom_connecter":
+                    print(fill('  You go upstairs and come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, and a attic hatch on the ceiling.'))
+                    
+                if part == "mineshaft_entrance":
+                    print(fill('  You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.'))
+                
+                if part == "cavepart1" and beento["cavepart1"] == 0:
+                    print(fill('  You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although their is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.'))
+                    beento["cavepart1"] = 1
+                    
+                elif part == "cavepart1":
+                    print(fill('  You are in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. There is a strong smell of sulfur and decaying meat. If you decide to go further into the tunnel like cave, go west.'))
+                
+                if part == "cavepart2":
+                    print(fill('  As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right. As you decide which way to go you notice something you havent noticed before. Being so caught up in thinking about where the tunnel leads, you look around and notice that everything as become very block like, almost as if your mind has lost the ability to perceive slopes, spheres or angles. You also notice where the light has been coming from this whole time as there is an also block like torch pinned to the wall between the two branching paths.'))
+                
+                if part == "cavepart2_l1":
+                    print(fill('  You decide to travel down the left tunnel which eventually starts too open up into a large room filled with mine carts and bright block like torches. You also notice people but they aren\'t normal people, NO! They are all blocky, their arms, their legs, even their heads!'))
+                    
+        description = 0
         done = 1
 
 #Function to print a list of the places your character has discovered
@@ -1486,6 +1338,25 @@ def listplaces():
         for item in printplacesdiscovered:
             print(" - " + item)
         done = 1
+
+def listinventory():
+    #Makes all the variables in the function global
+    global action
+    global part
+    global description
+    global done
+    global yesornoaction
+    if action == "list inventory" or action == "show inventory" or action == "open inventory":
+        print("Inventory: ")
+        if inventory["cabin_key"] == 1:
+            print(" - Cabin Key")
+        if inventory["cabin_upstairs_bedroom_key"] == 1:
+            print(" - Upstairs Cabin Bedroom Key")
+        if inventory["water_bucket"] == 1:
+            print(" - Bucket Filled With Water")
+        if inventory["bucket"] == 1:
+            print(" - Bucket")
+        done = 1
     
 while True:
     done = 0
@@ -1498,8 +1369,8 @@ while True:
         #Lets you type in a action and puts the action into a variable
         action = input(">").lower()
     if done == 0:
-        #Calls settings function
-        settings()
+        #Calls the list places function
+        listplaces()
     if done == 0:
         #Calls the save function
         save()
@@ -1523,9 +1394,9 @@ while True:
     if done == 0:
         leave()
     if done == 0:
-        goto()
-    if done == 0:
         goback()
+    if done == 0:
+        goto()
     if done == 0:
         goupstairs()
     if done == 0:
@@ -1535,13 +1406,10 @@ while True:
         #Calls the take object function
         takeobject()
     if done == 0:
-        listcommands()
-    if done == 0:
         #Calls the list inventory function
         listinventory()
     if done == 0:
-        #Calls the list places function
-        listplaces()
+        listcommands()
     if done == 0:
         print('Thats not a valid action!')
     placesdiscovered.add(part)

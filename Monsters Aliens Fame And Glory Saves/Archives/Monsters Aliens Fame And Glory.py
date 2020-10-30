@@ -1,16 +1,22 @@
-description = 2
+# Python 3 server example
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
+
+hostName = "localhost"
+serverPort = 8080
+
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        description = 2
 part = "grassy_field"
 done = 0
 yesornoaction = 0
 placesdiscovered = set([])
 placesdiscovered.add(part)
 printplacesdiscovered = ["Grassy Field"]
-inventory = {"cabin_key":1, "water_bucket":1, "bucket":0}
-lockeddoors = {"cabin_front_door":1}
-changableobjects = {"lit_cabin_fireplace":1}
+inventory = {"cabin_key":1}
+lockeddoors = {"cabin_front_door":0}
 paratype = 2
-cabindict = set(["cabin", "log cabin", "creepy log cabin"])
-bathroomdict = set(["bathroom", "bath room", "washroom", "wash room"])
 
 def save():
     #Makes all the variables in the function global
@@ -19,9 +25,6 @@ def save():
     global description
     global done
     global yesornoaction
-    global inventory
-    global lockeddoors
-    global changableobjects
     if ("save" in action):
         action = action.strip()
         if action == "save":
@@ -29,16 +32,7 @@ def save():
             saveplacesdiscovered = " "
             for item in placesdiscovered:
                 saveplacesdiscovered = saveplacesdiscovered + item + " "
-            saveinventory = " "
-            for key in inventory:
-                saveinventory = saveinventory + str(key) + ":" + str(inventory[key]) + " "
-            savelockeddoors = " "
-            for key in lockeddoors:
-                savelockeddoors = savelockeddoors + str(key) + ":" + str(lockeddoors[key]) + " "
-            savechangableobjects = " "
-            for key in changableobjects:
-                savechangableobjects = savechangableobjects + str(key) + ":" + str(changableobjects[key]) + " "
-            savefile = {savepart:1, saveplacesdiscovered:2, saveinventory:3, savelockeddoors:4, savechangableobjects:5}
+            savefile = {savepart:1, saveplacesdiscovered:2}
             print("Type: load " + str(savefile))
             print("In order to load your game.")
             print("You saved the game.")
@@ -51,48 +45,18 @@ def load():
     global description
     global done
     global yesornoaction
-    global inventory
-    global lockeddoors
-    global changableobjects
     if ("load" in action):
         action = action.strip()
         action = action[5:]
         if (action[:1] == "{") and (action[-1:] == "}"):
-            #Loads places discovered
             index = action.find("': 1")
             part = action[2:index]
             index2 = action.find("': 2")
-            action2 = action[index + 8:index2]
-            for index, word in enumerate(action2.split()):
+            action = action[index + 8:index2]
+            for index, word in enumerate(action.split()):
                 placesdiscovered.add(word)
             print(placesdiscovered)
-            
-            #Loads inventory
-            index = action.find("': 3")
-            action2 = action[index2 + 8:index]
-            inventory = {}
-            for index, word in enumerate(action2.split()):
-                index3 = word.find(":")
-                inventory[word[:index3]] = int(word[index3 + 1:])
-            print(inventory)
-            
-            #Loads locked/unlocked doors
-            index = action.find("': 3")
-            index2 = action.find("': 4")
-            action2 = action[index + 8:index2]
-            lockeddoors = {}    
-            for index, word in enumerate(action2.split()):
-                index3 = word.find(":")
-                lockeddoors[word[:index3]] = int(word[index3 + 1:])
-            print(lockeddoors)
-            index = action.find("': 4")
-            index2 = action.find("': 5")
-            action2 = action[index + 8:index2]
-            changableobjects = {}    
-            for index, word in enumerate(action2.split()):
-                index3 = word.find(":")
-                changableobjects[word[:index3]] = int(word[index3 + 1:])
-            print(changableobjects)
+            #placesdiscovered = action[0:index]
             print(">You loaded the game from your savefile.")
             description = 1
             done = 1
@@ -109,20 +73,17 @@ def examine():
     global yesornoaction
     
     #Determines if the action is a examine command
-    if ("examine" in action) or (action == "x") or ("describe" in action):
+    if ("examine" in action) or ("x" in action) or ("describe" in action):
         action = action.strip()
-        if action.find("examine") == 0 or action.find("inspect") == 0:
+        if action.find("examine") == 0:
             action = action[7:]
         elif action.find("x") == 0:
             action = action[1:]
         elif action.find("describe") == 0:
             action = action[8:]
-        elif action.find("check") == 0:
-            action = action[5:]
         action = action.strip()
         if action[1:] == "":
-            print("What do you want to examine?")
-            action = input("> ").lower()
+            action = input(">What do you want to examine? ").lower()
         action = action.strip()
         if part == "grassy_field":
             if action == "grass" or action == "field" or action == "brush":
@@ -152,10 +113,6 @@ def examine():
         elif part == "cabin_living_room":
             if action == "fireplace":
                 print('It seems odd that fireplace was lit before you got here.')
-            elif action == "table" or action == "dining table":
-                print("You notice a key on the table.")
-            else:
-                print(" We don't know what you are trying to examine.")
         else:
             print("There is nothing to examine here.")
         done = 1
@@ -170,7 +127,7 @@ def move():
     global done
     global yesornoaction
     #Determines if the action is a movement command
-    if ("n" in action) or ("e" in action) or ("s" in action) or ("w" in action) or ("u" in action) or ("d" in action) or ("l" in action) or ("r" in action) or ("go in" in action) or ("enter" in action) or ("exit" in action) or ("leave" in action):
+    if ("n" in action) or ("e" in action) or ("s" in action) or ("w" in action) or ("u" in action) or ("d" in action) or ("l" in action) or ("r" in action):
         #Determines if the direction is north
         if action == "n" or action == "north":
             if part == "grassy_field":
@@ -261,8 +218,8 @@ def move():
                 print('You cant go that way!')
             done = 1
         #Determines if the action is to go inside
-        elif "go inside" in action or "go in" in action or "enter" in action or "enter building" in action:
-            if part == "cabin_front" and (action == "go inside" or action == "go in" or action == "enter" or action == "enter building"):
+        elif action == "go inside" or action == "go in" or action == "enter" or action == "enter building":
+            if part == "cabin_front":
                 if inventory["cabin_key"] == 1 and lockeddoors["cabin_front_door"] == 1:
                     print("You will have to unlock the door first.")
                 elif inventory["cabin_key"] == 0 and lockeddoors["cabin_front_door"] == 1:
@@ -270,161 +227,46 @@ def move():
                 elif lockeddoors["cabin_front_door"] == 0:
                     part = "cabin_living_room"
                     description = 1
-                done = 1
             elif action[:9] == "go inside":
                 action = action[10:]
             elif action[:5] == "go in" or action[:5] == "enter":
                 action = action[6:]
-            if action != "" and action != "go inside" and action != "go in" and action != "enter" and action != "enter building" and action != "cabin" and action != "log cabin" and action != "creepy log cabin" and action != "bathroom" and action != "bath room" and action != "washroom" and action != "wash room" and action != "bedroom":
-                print('We dont know what your trying to enter.')
-            elif part == "cabin_front":
-                if action in cabindict:
-                    if inventory["cabin_key"] == 1 and lockeddoors["cabin_front_door"] == 1:
-                        print("You will have to unlock the door first.")
-                    elif inventory["cabin_key"] == 0 and lockeddoors["cabin_front_door"] == 1:
-                        print("It seems to be locked. You will require a key to unlock the door.")
-                    elif lockeddoors["cabin_front_door"] == 0:
-                        part = "cabin_living_room"
-                        description = 1
-            elif part == "cabin_living_room":
-                if action in bathroomdict:
-                    part = "cabin_1st_floor_bathroom"
-                    description = 1
-                elif action == "bedroom":
-                    part = "cabin_1st_floor_bedroom"
-                    description = 1
-                else:
-                    print('We dont know what your trying to enter.')
-            elif action == "":
+            if action == "":
                 print("What do you want to enter?")
                 action = input(">").lower()
-                if part == "cabin_front":
-                    if action in cabindict:
-                        if inventory["cabin_key"] == 1 and lockeddoors["cabin_front_door"] == 1:
-                            print("You will have to unlock the door first.")
-                        elif inventory["cabin_key"] == 0 and lockeddoors["cabin_front_door"] == 1:
-                            print("It seems to be locked. You will require a key to unlock the door.")
-                        elif lockeddoors["cabin_front_door"] == 0:
-                            part = "cabin_living_room"
-                            description = 1
-                    else:
-                        print('We dont know what your trying to enter.')
-                elif part == "cabin_living_room":
-                    if action in bathroomdict:
-                        part = "cabin_1st_floor_bathroom"
-                        description = 1
-                    elif action == "bedroom":
-                        part = "cabin_1st_floor_bedroom"
-                        description = 1
-                    else:
-                        print('We dont know what your trying to enter.')
+            if part == "cabin_living_room":
+                if action == "bathroom":
+                    part = "cabin_1st_floor_bathroom"
+                    description = 1
                 else:
                     print('We dont know what your trying to enter.')
-            done = 1
-        #Determines if the action is to exit room
-        elif "exit" in action or "leave" in action:
-            if part == "cabin_living_room" and (action == "exit" or action == "leave"):
-                part = "cabin_front"
-                description = 1
-            elif part == "cabin_1st_floor_bathroom" and (action == "exit" or action == "leave"):
-                part = "cabin_living_room"
-                description = 1
-            elif action[:4] == "exit":
-                action = action[5:]
-            elif action[:5] == "leave":
-                action = action[6:]
-            print(action)
-            if action != "" and action != "exit" and action != "leave" and action != "bathroom" and action != "bath room" and action != "washroom" and action != "wash room":
-                print('We dont know what your trying to exit.')
-            elif part == "cabin_living_room":
-                if action == "cabin" or action == "main room" or action == "living room":
-                    part = "cabin_front"
-                    description = 1
-            elif part == "cabin_1st_floor_bathroom":
-                if action in bathroomdict:
-                    part = "cabin_living_room"
-                    description = 1
-            elif action == "":
-                print("What do you want to exit?")
-                action = input(">").lower()
-                if part == "cabin_living_room":
-                    if action == "cabin" or action == "main room" or action == "living room":
-                        part = "cabin_front"
-                        description = 1
-                    else:
-                        print('We dont know what your trying to exit.')
-                elif part == "cabin_1st_floor_bathroom":
-                    if action in bathroomdict:
-                        part = "cabin_living_room"
-                        description = 1
-                    else:
-                        print('We dont know what your trying to exit.')
-                else:
-                    print('We dont know what your trying to exit.')
-                
-            '''else:
+            else:
                 print('You cant go that way!')
-                '''
             done = 1
-                                    
+            
 #Function to check if the action is a unlock command, and then if
 #true, unlocks the specified object/door
-def dosomethingwithsomething():
+def unlock():
     #Makes all the variables in the function global
     global action
     global part
     global description
     global done
     global yesornoaction
-    if action == "unlock" or action == "unlock door" or action == "use key" or action == "use key on door" or action == "use key on cabin door":
-        if action[6:] == "" or action == "use key":
-            print("What would you like to unlock?")
-            action = input(">").lower()
-        elif action[7:] == "door" or action[7:] == "cabin door":
-            action = action[7:]
-        elif action[11:] == "door" or action[11:] == "cabin door":
-            action = action[11:]
+    if action == "unlock" or action == "unlock door":
         if part == "cabin_front":
-            if action == "door" or action == "cabin door":
-                if inventory["cabin_key"] == 0 and lockeddoors["cabin_front_door"] == 1:
-                    print("You will require a key to unlock the door.")
-                elif inventory["cabin_key"] == 1 and lockeddoors["cabin_front_door"] == 1:
-                    print("You use the cabin key to unlock the front door.")
-                    lockeddoors["cabin_front_door"] = 0
-                    inventory["cabin_key"] = 0
-                elif lockeddoors["cabin_front_door"] == 0:
-                    print("The door is already unlocked.")
-        else:
-            print("We don't know what your trying to unlock.")
-        done = 1
-    elif action[:12] == "put out fire" or action[:18] == "use bucket on fire":
-        if action[:17] == "put out fireplace":
-            action = action[18:]
-        elif action[:12] == "put out fire":
-            action = action[13:]
-        if action == "":
-            print("What would you like to put the fire out with?")
-            action = input(">").lower()
-        elif action[:4] == "with":
-            action = action[5:]
-        if action[:18] == "use bucket on fire":
-            action = action[4:10]
-        if part == "cabin_living_room":
-            if action == "water bucket" or "bucket":
-                if inventory["bucket"] == 1 and inventory["water_bucket"] == 0:
-                    print("You will have to fill the bucket with water first.")
-                elif inventory["water_bucket"] == 1 and inventory["bucket"] == 0:
-                    print("You put out the fire with the water bucket.")
-                    inventory["water_bucket"] = 0
-                    inventory["bucket"] = 1
-                    changableobjects["lit_cabin_fireplace"] = 0
-                elif inventory["water_bucket"] == 0 and inventory["bucket"] == 0:
-                    print("You don't have a water bucket to put the fire out with.")
-            else:
-                print("We don't know what your trying to put out the fire with.")
-        else:
-            print("We don't know what fire your trying to put out.")
-        done = 1
+            if inventory["cabin_key"] == 0 and lockeddoors["cabin_front_door"] == 1:
+                print("You will require a key to unlock the door.")
+                done = 1
+            elif inventory["cabin_key"] == 1 and lockeddoors["cabin_front_door"] == 1:
+                print("You use the cabin key to unlock the front door.")
+                lockeddoors["cabin_front_door"] = 0
+                inventory["cabin_key"] = 0
+                done = 1
+            elif lockeddoors["cabin_front_door"] == 0:
+                print("The door is already unlocked.")
+                done = 1
+
 #Function to determine if a yes or no question has been asked and then
 #determines if the answer was yes or no, and then acts accordingly
 def yesorno():
@@ -478,60 +320,6 @@ def askyesorno():
         print('Do you go in?')
         yesornoaction = 1
         
-"""  
-#Function to determine if the action is to check an object
-def checkobject():
-    #Makes all the variables in the function global
-    global action
-    global part
-    global description
-    global done
-    global yesornoaction
-    if action[:5] == "check" or action[:7] == "inspect":
-        if (action[:5] == "check" and action[5:] == "") or (action [:7] == "inspect" and action[7:] == ""):
-            print("What would you like to " + action + "?")
-            action = input(">").lower()
-        else:
-            if action [:5] == "check":
-                action = action[6:]
-            elif action[:7] == "inspect":
-                action = action[8:]
-        if part == "cabin_living_room":
-            if action == "table" or action == "dining table":
-                print("You notice a key on the table.")
-        else:
-            print("We don't know what your trying to check.")
-        done = 1
-"""
-#Function to determine if the action is to take an object
-def takeobject():
-    #Makes all the variables in the function global
-    global action
-    global part
-    global description
-    global done
-    global yesornoaction
-    if action[:4] == "take":
-        action = action[5:]
-        if action == "":
-            print("What do you want to take?")
-            action = input("> ").lower()
-        if action == "key" or action == "key on table":
-            if part == "cabin_living_room":
-                inventory["cabin_upstairs_bedroom_key"] = 1
-                print("You pick up the key.")
-        done = 1
-
-def listcommands():
-    if action == "list commands":
-        print("Commands:")
-        print(" - save")
-        print(" - load")
-        print(" - list places")
-        print(" - examine")
-        print(" - take")
-        print(" - unlock")
-    
 #Function to print a description of your surroundings when you enter a new location
 def printdescription():
     #Makes all the variables in the function global
@@ -570,10 +358,7 @@ def printdescription():
                     
                 elif part == "cabin_living_room":
                     print('  In the living room there is a table in the middle and a lit fireplace.')
-                
-                elif part == "cabin_1st_floor_bathroom":
-                    print('  You enter the bathroom.')
-                    
+                   
                 elif part == "mineshaft_entrance":
                     print('  You stand at the entrance to the mineshaft. All you can see is')
                     print('darkness, and you smell the strong stench of sulfur emanating from')
@@ -637,10 +422,10 @@ def printdescription():
                 
                 elif part == "cavepart2_l1":
                     print('  You decide to travel down the left tunnel which eventually starts too open up into a large room filled with mine carts and bright block like torches. You also notice people but they aren\'t normal people, NO! They are all blocky, their arms, their legs, even their heads!')
-                    
+                
         description = 0
         done = 1
-
+    
 #Function to print a list of the places your character has discovered
 def listplaces():
     #Makes all the variables in the function global
@@ -668,25 +453,6 @@ def listplaces():
             print(" - " + item)
         done = 1
 
-def listinventory():
-    #Makes all the variables in the function global
-    global action
-    global part
-    global description
-    global done
-    global yesornoaction
-    if action == "list inventory" or action == "show inventory" or action == "open inventory":
-        print("Inventory: ")
-        if inventory["cabin_key"] == 1:
-            print(" - Cabin Key")
-        if inventory["cabin_upstairs_bedroom_key"] == 1:
-            print(" - Upstairs Cabin Bedroom Key")
-        if inventory["water_bucket"] == 1:
-            print(" - Bucket Filled With Water")
-        if inventory["bucket"] == 1:
-            print(" - Bucket")
-        done = 1
-    
 while True:
     done = 0
     #Calls the description printing function
@@ -716,17 +482,21 @@ while True:
         #Calls the move function
         move()
     if done == 0:
-        #Calls the do something with something function
-        dosomethingwithsomething()
-    if done == 0:
-        #Calls the take object function
-        takeobject()
-    if done == 0:
-        #Calls the list inventory function
-        listinventory()
-    if done == 0:
-        listcommands()
+        #Calls the unlock function
+        unlock()
     if done == 0:
         print('Thats not a valid action!')
     placesdiscovered.add(part)
 
+
+if __name__ == "__main__":        
+    webServer = HTTPServer((hostName, serverPort), MyServer)
+    print("Server started http://%s:%s" % (hostName, serverPort))
+
+    try:
+        webServer.serve_forever()
+    except KeyboardInterrupt:
+        pass
+
+    webServer.server_close()
+    print("Server stopped.")
