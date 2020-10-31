@@ -529,30 +529,30 @@ bathroom_dict = set(["bathroom", "bath room", "washroom", "wash room"])
 bedroom_dict = set(["bedroom", "bed room"])
 living_room_dict = set(["living room", "livingroom", "main room", "lobby"])
 grassy_field_dict = set(["grassy field", "field", "open field"])
-mineshaftdict = set(["mineshaft", "mine shaft", "mine", "cave", "mine cave"])
-forestdict = set(["forest", "woods", "tree forest"])
+mineshaft_dict = set(["mineshaft", "mine shaft", "mine", "cave", "mine cave"])
+forest_dict = set(["forest", "woods", "tree forest"])
 
-neswdict = set(["n", "north", "e", "east", "s", "south", "w", "west", "ne", "n e", "n-e", "northeast", "north east", "north-east", "se", "s e", "s-e", "southeast", "south east", "south-east", "sw", "s w", "s-w", "southwest", "south west", "south-west", "nw", "n w", "n-w", "northwest", "north west", "north-west"])
+nesw_dict = set(["n", "north", "e", "east", "s", "south", "w", "west", "ne", "n e", "n-e", "northeast", "north east", "north-east", "se", "s e", "s-e", "southeast", "south east", "south-east", "sw", "s w", "s-w", "southwest", "south west", "south-west", "nw", "n w", "n-w", "northwest", "north west", "north-west"])
 
-floor1dict = set(["1st floor", "1stfloor", "floor 1", "first floor"])
-floor2dict = set(["2nd floor", "2ndfloor", "floor 2", "second floor"])
-floor3dict = set(["3rd floor", "3rdfloor", "floor 3", "third floor"])
-floornumberdict = set(["1st floor", "1stfloor", "floor 1", "first floor", "2nd floor", "2ndfloor", "floor 2", "second floor", "3rd floor", "3rdfloor", "floor 3", "third floor"])
+floor1_dict = set(["1st floor", "1stfloor", "floor 1", "first floor"])
+floor2_dict = set(["2nd floor", "2ndfloor", "floor 2", "second floor"])
+floor3_dict = set(["3rd floor", "3rdfloor", "floor 3", "third floor"])
+floor_number_dict = set(["1st floor", "1stfloor", "floor 1", "first floor", "2nd floor", "2ndfloor", "floor 2", "second floor", "3rd floor", "3rdfloor", "floor 3", "third floor"])
 
 '''
-gotoupstairsdict = set(["upstairs", "upper floor", "next floor up"])
-gotodownstairsdict = set(["downstairs", "lower floor", "next floor down"])
+go_to_upstairs_dict = set(["upstairs", "upper floor", "next floor up"])
+go_to_downstairs_dict = set(["downstairs", "lower floor", "next floor down"])
 '''
 
-gotoupstairsdict = set(["upstairs", "up stairs", "upper floor", "up a level", "up", "u", "next floor up"])
-gotodownstairsdict = set(["downstairs", "down stairs", "lower floor", "down a level", "down", "d", "next floor down"])
+go_to_upstairs_dict = set(["upstairs", "up stairs", "upper floor", "up a level", "up", "u", "next floor up"])
+go_to_downstairs_dict = set(["downstairs", "down stairs", "lower floor", "down a level", "down", "d", "next floor down"])
 
-opepcurtainsdict = set(["pull back curtain", "pull back curtains", "open curtain", "open curtains", "draw back curtain", "draw back curtains"])
-lighttorchonfiredict = set(["light torch on fire", "light torch ablaze", "light torch"])
-fireplacedict = set(["fireplace", "fire place"])
-takeobjectdict = set(["take", "grab", "snatch", "pick up"])
+open_curtains_dict = set(["pull back curtain", "pull back curtains", "open curtain", "open curtains", "draw back curtain", "draw back curtains"])
+light_torch_on_fire_dict = set(["light torch on fire", "light torch ablaze", "light torch"])
+fire_place_dict = set(["fireplace", "fire place"])
+take_object_dict = set(["take", "grab", "snatch", "pick up"])
 
-spaceafteractiondict = set([" ", ""])
+space_after_action_dict = set([" ", ""])
 
 abilities = set(["pick up"])
 
@@ -642,58 +642,58 @@ def calculateactiontype():
         actiontype = set(["settings"])
         return
         
-    savegamedict = set(["save", "save game"])
-    if action in savegamedict:
+    save_game_dict = set(["save", "save game"])
+    if action in save_game_dict:
         actiontype = set(["save"])
         return
     
     '''
-    goupstairsdict = set(["go upstairs", "go up stairs", "go up a level", "go up", "go u", "u"])
-    if action in goupstairsdict:
+    go_upstairs_dict = set(["go upstairs", "go up stairs", "go up a level", "go up", "go u", "u"])
+    if action in go_upstairs_dict:
         actiontype = set(["go upstairs"])
         return
     
-    godownstairsdict = set(["go downstairs", "go down stairs", "go down a level", "go down", "go d", "d"])
-    if action in godownstairsdict:
+    go_downstairs_dict = set(["go downstairs", "go down stairs", "go down a level", "go down", "go d", "d"])
+    if action in go_downstairs_dict:
         actiontype = set(["go downstairs"])
         return
     '''
     
-    if action in neswdict:
+    if action in nesw_dict:
         actiontype = set(["move"])
         return
     
-    leftdict = set(["left", "l"])
-    if action in leftdict:
+    left_dict = set(["left", "l"])
+    if action in left_dict:
         actiontype = set(["left"])
         return
         
-    rightdict = set(["right", "r"])
-    if action in rightdict:
+    right_dict = set(["right", "r"])
+    if action in right_dict:
         actiontype = set(["right"])
         return
     
-    gobackdict = set(["go back", "go to previous part"])
-    if action in gobackdict:
+    go_back_dict = set(["go back", "go to previous part"])
+    if action in go_back_dict:
         actiontype = set(["go back"])
         return
     
     
-    loadgamedict = set(["load game", "load"])
-    examinedict = set(["examine", "x", "inspect", "describe", "check"])
-    tptodict = set(["tp to", "tp"])
-    enterdict = set(["enter", "go inside", "go in"])
-    leavedict = set(["leave", "exit"])
-    gotodict = set(["go to", "go"])
-    fightdict = set(["beat up", "fight", "pick a fight with", "battle"])
+    load_game_dict = set(["load game", "load"])
+    examine_dict = set(["examine", "x", "inspect", "describe", "check"])
+    tp_to_dict = set(["tp to", "tp"])
+    enter_dict = set(["enter", "go inside", "go in"])
+    leave_dict = set(["leave", "exit"])
+    goto_dict = set(["go to", "go"])
+    fight_dict = set(["beat up", "fight", "pick a fight with", "battle"])
     
-    printdict = set(["print", "list", "show", "open"])
+    print_dict = set(["print", "list", "show", "open"])
     
     amountofactions = 0
     action2 = action
-    for item in set(list(loadgamedict) + list(examinedict) + list(tptodict) + list(enterdict) + list(leavedict) + list(gotodict) + list(takeobjectdict) + list(fightdict)):
+    for item in set(list(load_game_dict) + list(examine_dict) + list(tp_to_dict) + list(enter_dict) + list(leave_dict) + list(goto_dict) + list(take_object_dict) + list(fight_dict)):
         index = action2.find(item)
-        if item in action2 and action2[index + len(item):index + len(item) + 1] in spaceafteractiondict:
+        if item in action2 and action2[index + len(item):index + len(item) + 1] in space_after_action_dict:
             action2 = action2[:index] + action2[index + len(item) + 1:]
             amountofactions = amountofactions + 1
     if amountofactions > 1:
@@ -701,54 +701,54 @@ def calculateactiontype():
         done = 1
         return
     
-    for item in set(list(loadgamedict) + list(examinedict) + list(tptodict) + list(enterdict) + list(leavedict) + list(gotodict) + list(takeobjectdict) + list(fightdict)):
-        if action.find(item) == 0 and action[len(item):len(item) + 1] in spaceafteractiondict:
+    for item in set(list(load_game_dict) + list(examine_dict) + list(tp_to_dict) + list(enter_dict) + list(leave_dict) + list(goto_dict) + list(take_object_dict) + list(fight_dict)):
+        if action.find(item) == 0 and action[len(item):len(item) + 1] in space_after_action_dict:
             if item == "go" and (action.find("go inside") == 0 or action.find("go in") == 0 or action.find("go to") == 0):
                 action = action
             else:
                 action = action[len(item) + 1:]
                 action = action.strip()
               
-            if action == "" and item not in set(list(leavedict) + list(enterdict)):
-                if item in loadgamedict:
+            if action == "" and item not in set(list(leave_dict) + list(enter_dict)):
+                if item in load_game_dict:
                     print("Enter save game data to load save:")
-                elif item in examinedict:
+                elif item in examine_dict:
                     print("What do you want to examine?")
-                elif item in tptodict:
+                elif item in tp_to_dict:
                     print("Where do you want to teleport to?")
-                elif item in gotodict:
+                elif item in goto_dict:
                     print("Where would you like to " + item + "?")
-                elif item in set(list(takeobjectdict) + list(fightdict)):
+                elif item in set(list(take_object_dict) + list(fight_dict)):
                     print("What do you want to " + item + "?")
                 action = input(">").lower()
                 action = action.strip()
-            elif action == "" and item in enterdict and part != "cabin_front" and part != "simpsons_house_front":
+            elif action == "" and item in enter_dict and part != "cabin_front" and part != "simpsons_house_front":
                 print("What would you like to " + item + "?")
                 action = input(">").lower()
                 action = action.strip()
-            if item in loadgamedict:
+            if item in load_game_dict:
                 actiontype = set(["load", "save"])
-            elif item in examinedict:
+            elif item in examine_dict:
                 actiontype = set(["examine"])
-            elif item in tptodict:
+            elif item in tp_to_dict:
                 actiontype = set(["teleport"])
-            elif item in enterdict:
+            elif item in enter_dict:
                 actiontype = set(["enter"])
-            elif item in leavedict:
+            elif item in leave_dict:
                 actiontype = set(["leave"])
-            elif item in gotodict:
-                if action in neswdict:
+            elif item in goto_dict:
+                if action in nesw_dict:
                     actiontype = set(["move"])
-                elif action in leftdict:
+                elif action in left_dict:
                     actiontype = set(["left"])
-                elif action in rightdict:
+                elif action in right_dict:
                     actiontype = set(["right"])
                 else:
                     actiontype = set(["go to"])
-            elif item in fightdict:
+            elif item in fight_dict:
                 actiontype = set(["fight"])
                 action2 = item
-            elif item in takeobjectdict:
+            elif item in take_object_dict:
                 actiontype = set(["take"])
                 action2 = item
                 
@@ -889,7 +889,7 @@ class descriptionstuff():
                     if part == "cabin_1st_floor_bathroom":
                         print(fill(indent('You enter the bathroom.')))
                         
-                    if part == "cabin_2nd_floor_bedroom_connecter" and (action in gotoupstairsdict or isfloornumberaction == 2):
+                    if part == "cabin_2nd_floor_bedroom_connecter" and (action in go_to_upstairs_dict or isfloornumberaction == 2):
                         print(fill(indent('You go upstairs and come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, and a attic hatch on the ceiling.')))
                     elif part == "cabin_2nd_floor_bedroom_connecter":
                         print(fill(indent('You come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, a attic hatch on the ceiling as well as stairs to the main floor.')))
@@ -1201,12 +1201,12 @@ def examine():
         if part == "grassy_field":
             if action == "grass" or action == "field" or action == "brush":
                 print(fill("There seems to be purple particles emanating from the grass."))
-            elif action in mineshaftdict:
+            elif action in mineshaft_dict:
                 print(fill("You would have to get closer to see it."))
             else:
                 print(fill("We don't know what you are trying to examine."))
         elif part == "cabin_living_room":
-            if action in fireplacedict:
+            if action in fire_place_dict:
                 print(fill('It seems odd that fireplace was lit before you got here.'))
             elif action == "table" or action == "dining table":
                 print(fill("You notice a key on the table."))
@@ -1343,13 +1343,13 @@ class movement():
                     print('You cant go that way!')
                 done = 1
             #Determines if the direction is northeast
-            northeastdict = set(["ne", "n e", "n-e", "northeast", "north east", "north-east"])
-            if action in northeastdict:
+            northeast_dict = set(["ne", "n e", "n-e", "northeast", "north east", "north-east"])
+            if action in northeast_dict:
                 print('You cant go that way!')
                 done = 1
             #Determines if the direction is southeast
-            southeastdict = set(["se", "s e", "s-e", "southeast", "south east", "south-east"])
-            if action in southeastdict:
+            southeast_dict = set(["se", "s e", "s-e", "southeast", "south east", "south-east"])
+            if action in southeast_dict:
                 if part == "grassy_field":
                     part = "cabin_front"
                     description = 1
@@ -1357,13 +1357,13 @@ class movement():
                     print('You cant go that way!')
                 done = 1
             #Determines if the direction is southwest
-            southwestdict = set(["sw", "s w", "s-w", "southwest", "south west", "south-west"])
-            if action in southwestdict:
+            southwest_dict = set(["sw", "s w", "s-w", "southwest", "south west", "south-west"])
+            if action in southwest_dict:
                 print('You cant go that way!')
                 done = 1
             #Determines if the direction is northwest
-            northwestdict = set(["nw", "n w", "n-w", "northwest", "north west", "north-west"])
-            if action in northwestdict:
+            northwest_dict = set(["nw", "n w", "n-w", "northwest", "north west", "north-west"])
+            if action in northwest_dict:
                 if part == "cabin_front":
                     part = "grassy_field"
                     description = 1
@@ -1415,13 +1415,13 @@ class movement():
         if "enter" in actiontype:
             if 1 == 1:
                 
-                for item in set(list(floor1dict) + list(floor2dict) + list(floor3dict)):
+                for item in set(list(floor1_dict) + list(floor2_dict) + list(floor3_dict)):
                     if item in action:
-                        if item in floor1dict:
+                        if item in floor1_dict:
                             isfloornumberaction = 1
-                        elif item in floor2dict:
+                        elif item in floor2_dict:
                             isfloornumberaction = 2
-                        elif item in floor3dict:
+                        elif item in floor3_dict:
                             isfloornumberaction = 3
                         action = action[:action.find(item)] + action[action.find(item) + len(item) + 1:]
                         if action == "":
@@ -1433,7 +1433,7 @@ class movement():
                 done = 0
                 
                 for item in cabin_dict:
-                    if action.find(item) == 0 and action[len(item):len(item) + 1] in spaceafteractiondict:
+                    if action.find(item) == 0 and action[len(item):len(item) + 1] in space_after_action_dict:
                         if item in cabin_dict:
                             specificaction = 1
                         action = action[:action.find(item)] + action[action.find(item) + len(item) + 1:]
@@ -1531,22 +1531,22 @@ class movement():
         global isjustspecificaction
         
         def gotoerror():
-            if action in gotoupstairsdict:
+            if action in go_to_upstairs_dict:
                 print("You can't go upstairs here.")
-            elif action in gotodownstairsdict:
+            elif action in go_to_downstairs_dict:
                 print("You can't go downstairs here.")
             else:
                 print("We don't know where your trying to go to.")
             
         if "go to" in actiontype:
             
-            for item in set(list(floor1dict) + list(floor2dict) + list(floor3dict)):
+            for item in set(list(floor1_dict) + list(floor2_dict) + list(floor3_dict)):
                 if item in action:
-                    if item in floor1dict:
+                    if item in floor1_dict:
                         isfloornumberaction = 1
-                    elif item in floor2dict:
+                    elif item in floor2_dict:
                         isfloornumberaction = 2
-                    elif item in floor3dict:
+                    elif item in floor3_dict:
                         isfloornumberaction = 3
                     action = action[:action.find(item)] + action[action.find(item) + len(item) + 1:]
                     if action == "":
@@ -1558,7 +1558,7 @@ class movement():
             done = 0
             
             for item in cabin_dict:
-                if action.find(item) == 0 and action[len(item):len(item) + 1] in spaceafteractiondict:
+                if action.find(item) == 0 and action[len(item):len(item) + 1] in space_after_action_dict:
                     if item in cabin_dict:
                         specificaction = 1
                     action = action[:action.find(item)] + action[action.find(item) + len(item) + 1:]
@@ -1576,10 +1576,10 @@ class movement():
             elif part == "grassy_field" and specificaction == 0:
                 if action in grassy_field_dict:
                     print("You are already at the grassy field.")
-                elif action in mineshaftdict:
+                elif action in mineshaft_dict:
                     part = "mineshaft_entrance"
                     description = 1
-                elif action in forestdict:
+                elif action in forest_dict:
                     part = "forestpart1"
                     description = 1
                 else:
@@ -1603,18 +1603,18 @@ class movement():
                         description = 1
                     else:
                         print("You are already in the " + action + ".")
-                elif (isfloornumberaction == 2 and isjustfloornumberaction == 1 and specificaction < 2) or (action in gotoupstairsdict and isfloornumberaction == 0 and specificaction == 0):
+                elif (isfloornumberaction == 2 and isjustfloornumberaction == 1 and specificaction < 2) or (action in go_to_upstairs_dict and isfloornumberaction == 0 and specificaction == 0):
                     part = "cabin_2nd_floor_bedroom_connecter"
                     description = 1
                     
                 #TODO
-                # elif action in kitchendict:
+                # elif action in kitchen_dict:
                     # part = "cabin_kitchen"
                     # description = 1
                 else:
                     gotoerror()
             elif part == "cabin_2nd_floor_bedroom_connecter":
-                if (isfloornumberaction < 2 and (action in living_room_dict or (action[:6] == "cabin " and action[6:] in living_room_dict))) or (isfloornumberaction == 1 and isjustfloornumberaction == 1) or action in gotodownstairsdict or "go downstairs" in actiontype:
+                if (isfloornumberaction < 2 and (action in living_room_dict or (action[:6] == "cabin " and action[6:] in living_room_dict))) or (isfloornumberaction == 1 and isjustfloornumberaction == 1) or action in go_to_downstairs_dict or "go downstairs" in actiontype:
                     part = "cabin_living_room"
                     description = 1
                 elif isfloornumberaction == 1 and action in bathroom_dict:
@@ -1623,7 +1623,7 @@ class movement():
                 elif isfloornumberaction == 1 and action in bedroom_dict:
                     part = "cabin_1st_floor_bedroom"
                     description = 1
-                elif isfloornumberaction == 1 and action in kitchendict:
+                elif isfloornumberaction == 1 and action in kitchen_dict:
                     part = "cabin_kitchen"
                     description = 1
                 #TODO
@@ -1760,22 +1760,22 @@ def dosomethingwithsomething():
     global defencepoints
     global questlist
     
-    usedict = set(["use"])
-    unlockdict = set(["unlock"])
-    putoutdict = set(["put out"])
-    keydict = set(["key"])
-    waterbucketdict = set(["bucket", "water bucket"])
-    itemstousedict = set(list(keydict) + list(waterbucketdict))
-    thingstousekeysondict = set(["door", "to unlock door"])
-    thingstousewaterondict = set(list(fireplacedict))
-    thingstouseitemsondict = set(list(thingstousekeysondict) + list(fireplacedict))
+    use_dict = set(["use"])
+    unlock_dict = set(["unlock"])
+    put_out_dict = set(["put out"])
+    key_dict = set(["key"])
+    water_bucket_dict = set(["bucket", "water bucket"])
+    items_to_use_dict = set(list(key_dict) + list(water_bucket_dict))
+    things_to_use_keys_on_dict = set(["door", "to unlock door"])
+    things_to_use_water_on_dict = set(list(fire_place_dict))
+    things_to_use_items_on_dict = set(list(things_to_use_keys_on_dict) + list(fire_place_dict))
     
-    usekeyondoordict = set(["door", "to unlock door"])
+    use_key_on_door_dict = set(["door", "to unlock door"])
     
     itemtouse = ""
     useitemonaction = ""
     
-    if action.find("unlock") == 0 and action[6:7] in spaceafteractiondict:
+    if action.find("unlock") == 0 and action[6:7] in space_after_action_dict:
         action = action[7:]
         actiontype = set(["use item"])
         itemtouse = "key"
@@ -1785,17 +1785,17 @@ def dosomethingwithsomething():
             useitemonaction = useitemonaction.strip()
         else:
             useitemonaction = action
-        if useitemonaction not in thingstousekeysondict and useitemonaction in thingstouseitemsondict:
+        if useitemonaction not in things_to_use_keys_on_dict and useitemonaction in things_to_use_items_on_dict:
             print(fill("You can't unlock that."))
             done = 1
             return
-        elif useitemonaction not in thingstouseitemsondict:
+        elif useitemonaction not in things_to_use_items_on_dict:
             print(fill("We don't know what your trying to unlock."))
             done = 1
             return
         
     itemschecked = 0
-    if action.find("put out") == 0 and action[7:8] in spaceafteractiondict:
+    if action.find("put out") == 0 and action[7:8] in space_after_action_dict:
         action = action[8:]
         action = action.strip()
         actiontype = set(["use item"])
@@ -1806,9 +1806,9 @@ def dosomethingwithsomething():
         if action.find("the ") == 0:
             action = action[4:]
             action = action.strip()
-        for item in thingstousewaterondict:
+        for item in things_to_use_water_on_dict:
             itemschecked += 1
-            if action.find(item) == 0 and action[len(item):len(item) + 1] in spaceafteractiondict:
+            if action.find(item) == 0 and action[len(item):len(item) + 1] in space_after_action_dict:
                 itemschecked -= 1
                 useitemonaction = item
                 action = action[len(item) + 1:]
@@ -1820,11 +1820,11 @@ def dosomethingwithsomething():
                     action = input(">").lower()
                     action = action.strip()
                 itemtouse = action
-                if itemtouse not in itemstousedict:
+                if itemtouse not in items_to_use_dict:
                     print(fill("We don't know what your trying to use to put out the " + useitemonaction + "."))
                     done = 1
                     return
-    if itemschecked == len(thingstousewaterondict):
+    if itemschecked == len(things_to_use_water_on_dict):
         print(fill("We don't know what your trying to put out."))
         done = 1
         return
@@ -1838,10 +1838,10 @@ def dosomethingwithsomething():
     if action.find("use ") == 0:
         action = action[4:]
         actiontype = set(["use item"])
-        for item in itemstousedict:
+        for item in items_to_use_dict:
             itemschecked += 1
             index = action.find(item)
-            if action.find(item) == 0 and action[index + len(item):index + len(item) + 1] in spaceafteractiondict:
+            if action.find(item) == 0 and action[index + len(item):index + len(item) + 1] in space_after_action_dict:
                 itemschecked -= 1
                 itemtouse = item
                 if action == "":
@@ -1850,17 +1850,17 @@ def dosomethingwithsomething():
                     useitemonaction = useitemonaction.strip()
                 else:
                     useitemonaction = action[:index] + action[index + len(item) + 1:]
-                if useitemonaction not in thingstouseitemsondict:
+                if useitemonaction not in things_to_use_items_on_dict:
                     print(fill("We don't know what your trying to use the " + itemtouse + " on."))
                     done = 1
                     return
-                elif (itemtouse in keydict and useitemonaction not in thingstousekeysondict) or (itemtouse in waterbucketdict and useitemonaction not in thingstousewaterondict):
+                elif (itemtouse in key_dict and useitemonaction not in things_to_use_keys_on_dict) or (itemtouse in water_bucket_dict and useitemonaction not in things_to_use_water_on_dict):
                     print(fill("You can't use a " + itemtouse + " on a " + useitemonaction + "."))
                     done = 1
                     return
                 
                 break
-    if itemschecked == len(itemstousedict):
+    if itemschecked == len(items_to_use_dict):
         print(fill("We don't know what your trying to use."))
         done = 1
         return
@@ -1870,8 +1870,8 @@ def dosomethingwithsomething():
     if action == "unlock" or action == "unlock door" or action == "use key" or action == "use key on door" or action == "use key on cabin door":
     '''
     if "use item" in actiontype:
-        if itemtouse in keydict:
-            if useitemonaction in usekeyondoordict:
+        if itemtouse in key_dict:
+            if useitemonaction in use_key_on_door_dict:
                 if part == "cabin_front":
                         if inventory["cabin_key"] == 0 and lockeddoors["cabin_front_door"] == 1:
                             print("You will require a key to unlock the door.")
@@ -1885,10 +1885,10 @@ def dosomethingwithsomething():
                     print(fill("There isn't a " + useitemonaction + " to use a " + itemtouse + " on here."))
                 done = 1
             #TODO
-            #if useitemonaction in usekeyonboxdict:
+            #if useitemonaction in use_key_on_box_dict:
                 
-        elif itemtouse in waterbucketdict:
-            if useitemonaction in fireplacedict:
+        elif itemtouse in water_bucket_dict:
+            if useitemonaction in fire_place_dict:
                 if part == "cabin_living_room":
                         if inventory["bucket"] == 1 and inventory["water_bucket"] == 0:
                             print("You will have to fill the bucket with water first.")
@@ -1904,7 +1904,7 @@ def dosomethingwithsomething():
                     print("We don't know what " + useitemonaction + " your trying to put out.")
                 done = 1
                 
-    elif action in opepcurtainsdict:
+    elif action in open_curtains_dict:
         if part == "cabin_1st_floor_bathroom":
             if "peeper" in abilities:
                 print("You pull back the curtains.")
@@ -1916,7 +1916,7 @@ def dosomethingwithsomething():
         
     '''
     elif action[:12] == "put out fire" or action[:18] == "use bucket on fire":
-        if action[:7] == "put out" and action[8:] in fireplacedict:
+        if action[:7] == "put out" and action[8:] in fire_place_dict:
             action = action[18:]
         elif action[:12] == "put out fire":
             action = action[13:]
@@ -1948,17 +1948,17 @@ def dosomethingwithsomething():
     #elif action 
         
         
-    '''elif action[:19] in lighttorchonfiredict or action[:18] in lighttorchonfiredict or action[:11] in lighttorchonfiredict:        
-        if action[:19] in lighttorchonfiredict:
+    '''elif action[:19] in light_torch_on_fire_dict or action[:18] in light_torch_on_fire_dict or action[:11] in light_torch_on_fire_dict:        
+        if action[:19] in light_torch_on_fire_dict:
             action = action[20:]
-        elif action[:18] in lighttorchonfiredict:
+        elif action[:18] in light_torch_on_fire_dict:
             action = action[19:]
-        elif action[:11] in lighttorchonfiredict:
+        elif action[:11] in light_torch_on_fire_dict:
             action = action[12:]
         if action == "":
             print("What would you like to light the torch with?")
             action = input(">").lower()
-        if part == "cabin_living_room" and action in fireplacedict:
+        if part == "cabin_living_room" and action in fire_place_dict:
             if inventory["lit_torch"] == 1 and inventory["unlit_torch"] == 0:
                 print("Your torch is already lit.")
             elif inventory["lit_torch"] == 0 and inventory["unlit_torch"] == 1 and changableobjects["lit_cabin_fireplace"] == 1:
@@ -1994,15 +1994,15 @@ def yesorno():
     global defencepoints
     global questlist
     
-    yesnodict = set(["yes", "yas", "ye", "y", "no", "nah", "n"])
-    yesdict = set(["yes", "yas", "ye", "y"])
-    nodict = set(["no", "nah"])
+    yes_no_dict = set(["yes", "yas", "ye", "y", "no", "nah", "n"])
+    yes_dict = set(["yes", "yas", "ye", "y"])
+    no_dict = set(["no", "nah"])
     #Determines if a yes or no question has been asked and if a valid yes or
     #no answer has been given
-    if (action in yesnodict) and (yesornoaction == 1):
+    if (action in yes_no_dict) and (yesornoaction == 1):
         #Determines if the answer was yes and then determines the part, and
         #then acts accordingly
-        if action in yesdict:
+        if action in yes_dict:
             if part == "mineshaft_entrance":
                 part = "cavepart1"
                 description = 1
@@ -2013,13 +2013,13 @@ def yesorno():
                 done = 1
         #Determines if the answer was n and then asks if the player meant no or
         #north
-        elif action == "n" or action in nodict:
+        elif action == "n" or action in no_dict:
             if action == "n":
                 print('Did you mean no or north?')
                 action = input(">").lower()
             #Determines if the answer was no and then determines the part, and then
             #acts accordingly
-            if action in nodict:
+            if action in no_dict:
                 if part == "mineshaft_entrance":
                     print(fill('You decide to wait a little bit before entering the cave.'))
                     part = "grassy_field"
