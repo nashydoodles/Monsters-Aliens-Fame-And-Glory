@@ -1,0 +1,10 @@
+Examine:
+
+cabin_living_room:
+
+-fire_place_dict
+It seems odd that fireplace was lit before you got here.
+
+-table, dining table
+You notice a key on the table.
+

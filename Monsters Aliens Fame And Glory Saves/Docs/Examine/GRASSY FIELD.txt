@@ -1,0 +1,9 @@
+Examine:
+
+grassy_field:
+
+-grass, field, brush
+There seems to be purple particles emanating from the grass.
+
+-mineshaft_dict
+You would have to get closer to see it.

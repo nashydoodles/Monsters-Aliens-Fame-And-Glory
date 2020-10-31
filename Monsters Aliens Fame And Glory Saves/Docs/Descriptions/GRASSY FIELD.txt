@@ -1,9 +1,14 @@
-Grassy Field Descriptions:
+Descriptions:
 
 grassy_field:
 
+-beento = 0
 GRASSY FIELD
   You awaken in a grassy field surrounded by mountains. You have no idea who you are or how you got here
 
   There looks to be a mineshaft far off into the distance, tunneling into one of the mountains, to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.
 
+
+-beento = 1
+GRASSY FIELD
+  There looks to be a mineshaft in the distance to the west. There is also a creepy old looking log cabin to the south east and a forest to the north.

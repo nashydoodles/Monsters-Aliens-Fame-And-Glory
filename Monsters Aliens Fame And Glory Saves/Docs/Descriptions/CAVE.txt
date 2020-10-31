@@ -1,4 +1,4 @@
-Cave Descriptions:
+Descriptions:
 
 cavepart1:
 

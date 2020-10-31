@@ -1,0 +1,33 @@
+Descriptions:
+
+cabin_front:
+
+-changableobjects["ladder_on_side_of_cabin"] = 1
+-lockeddoors["cabin_front_door"] = 1
+CABIN
+  You stand at the front entrance of the creepy log cabin. 'random_there_is_string' a ladder leaning against the side of the cabin and the front door 'random_seems_to_be_string' to be locked.
+
+
+-changableobjects["ladder_on_side_of_cabin"] = 1
+-lockeddoors["cabin_front_door"] = 0
+CABIN
+  You stand at the front entrance of the creepy log cabin. 'random_there_is_string' a ladder leaning against the side of the cabin.
+
+
+-changableobjects["ladder_on_side_of_cabin"] = 0
+-lockeddoors["cabin_front_door"] = 1
+CABIN
+  You stand at the front entrance of the creepy log cabin. The front door 'random_seems_to_be_string' to be locked.
+
+
+-changableobjects["ladder_on_side_of_cabin"] = 0
+-lockeddoors["cabin_front_door"] = 0
+CABIN
+  You stand at the front entrance of the creepy log cabin.
+
+
+
+cabin_living_room:
+
+CABIN
+In the living room there is a table in the middle and a lit fireplace.
