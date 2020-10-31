@@ -524,11 +524,11 @@ healthpoints = 20
 attackpoints = 0
 defencepoints = 0
 
-cabindict = set(["cabin", "log cabin", "creepy log cabin"])
-bathroomdict = set(["bathroom", "bath room", "washroom", "wash room"])
-bedroomdict = set(["bedroom", "bed room"])
-livingroomdict = set(["living room", "livingroom", "main room", "lobby"])
-grassyfielddict = set(["grassy field", "field", "open field"])
+cabin_dict = set(["cabin", "log cabin", "creepy log cabin"])
+bathroom_dict = set(["bathroom", "bath room", "washroom", "wash room"])
+bedroom_dict = set(["bedroom", "bed room"])
+living_room_dict = set(["living room", "livingroom", "main room", "lobby"])
+grassy_field_dict = set(["grassy field", "field", "open field"])
 mineshaftdict = set(["mineshaft", "mine shaft", "mine", "cave", "mine cave"])
 forestdict = set(["forest", "woods", "tree forest"])
 
@@ -628,6 +628,11 @@ def calculateactiontype():
     global done
     global yesornoaction
     action = action.strip()
+    
+    look_around_dict = set(["look around", "check surroundings"])
+    if action in look_around_dict:
+        actiontype = set(["look around"])
+        return
     
     if action == "print d" or action == "print description":
         actiontype = set(["printd"])
@@ -750,6 +755,21 @@ def calculateactiontype():
 class descriptionstuff():
     global printdescriptionaction
     global printdescription
+    global look_around_action
+    
+    def look_around_action():
+        #Makes all the variables in the function global
+        global action
+        global action2
+        global actiontype
+        global part
+        global description
+        global done
+        global yesornoaction
+        
+        if "look around" in actiontype:
+            if part == "cabin_front":
+                print(fill("There is a doormat on the front step."))
     
     def printdescriptionaction():
         #Makes all the variables in the function global
@@ -1247,10 +1267,10 @@ class movement():
         global done
         if inventory["portal_gun"] == 1:
             if "teleport" in actiontype:
-                if action in grassyfielddict:
+                if action in grassy_field_dict:
                     part = "grassy_field"
                     description = 1
-                if action in cabindict:
+                if action in cabin_dict:
                     part = "cabin_front"
                     description = 1
                 if action == "attic":
@@ -1412,9 +1432,9 @@ class movement():
                     return
                 done = 0
                 
-                for item in cabindict:
+                for item in cabin_dict:
                     if action.find(item) == 0 and action[len(item):len(item) + 1] in spaceafteractiondict:
-                        if item in cabindict:
+                        if item in cabin_dict:
                             specificaction = 1
                         action = action[:action.find(item)] + action[action.find(item) + len(item) + 1:]
                         if action == "":
@@ -1436,16 +1456,16 @@ class movement():
                     else:
                         entererror()
                 elif part == "cabin_living_room":
-                    if action in bathroomdict and isfloornumberaction < 2 and specificaction < 2:
+                    if action in bathroom_dict and isfloornumberaction < 2 and specificaction < 2:
                         part = "cabin_1st_floor_bathroom"
                         description = 1
-                    elif action in bedroomdict and isfloornumberaction < 2 and specificaction < 2:
+                    elif action in bedroom_dict and isfloornumberaction < 2 and specificaction < 2:
                         part = "cabin_1st_floor_bedroom"
                         description = 1
                     else:
                         entererror()
                 elif part == "cabin_1st_floor_bathroom" or part == "cabin_1st_floor_bedroom":
-                    if action in livingroomdict and isfloornumberaction < 2 and specificaction < 2:
+                    if action in living_room_dict and isfloornumberaction < 2 and specificaction < 2:
                         part = "cabin_living_room"
                         description = 1
                     else:
@@ -1454,7 +1474,7 @@ class movement():
                     print("There is no cabin here.")
                     
                 elif part == "simpsons_house_front":
-                    if action in livingroomdict:
+                    if action in living_room_dict:
                         part = "simpsons_house_living_room"
                         
                 else:
@@ -1476,13 +1496,13 @@ class movement():
             
         #Determines if the action is to exit room
         if "leave" in actiontype:
-            if part == "cabin_living_room" and (action in "livingroomdict" or action in "cabindict" or action == ""):
+            if part == "cabin_living_room" and (action in living_room_dict or action in cabin_dict or action == ""):
                 part = "cabin_front"
                 description = 1
-            elif part == "cabin_1st_floor_bathroom" and (action in bathroomdict or action == ""):
+            elif part == "cabin_1st_floor_bathroom" and (action in bathroom_dict or action == ""):
                 part = "cabin_living_room"
                 description = 1
-            elif part == "cabin_1st_floor_bedroom" and (action in bedroomdict or action == ""):
+            elif part == "cabin_1st_floor_bedroom" and (action in bedroom_dict or action == ""):
                 part = "cabin_living_room"
                 description = 1
             else:
@@ -1537,16 +1557,16 @@ class movement():
                 return
             done = 0
             
-            for item in cabindict:
+            for item in cabin_dict:
                 if action.find(item) == 0 and action[len(item):len(item) + 1] in spaceafteractiondict:
-                    if item in cabindict:
+                    if item in cabin_dict:
                         specificaction = 1
                     action = action[:action.find(item)] + action[action.find(item) + len(item) + 1:]
                     if action == "":
                         isjustspecificaction = 1
                     break
                         
-            if (part == "cabin_front" or part == "mineshaft_entrance" or part == "forestpart1") and action in grassyfielddict and specificaction == 0:
+            if (part == "cabin_front" or part == "mineshaft_entrance" or part == "forestpart1") and action in grassy_field_dict and specificaction == 0:
                 part = "grassy_field"
                 description = 1
             
@@ -1554,7 +1574,7 @@ class movement():
                 part = "cabin_front"
                 description = 1
             elif part == "grassy_field" and specificaction == 0:
-                if action in grassyfielddict:
+                if action in grassy_field_dict:
                     print("You are already at the grassy field.")
                 elif action in mineshaftdict:
                     part = "mineshaft_entrance"
@@ -1565,19 +1585,19 @@ class movement():
                 else:
                     gotoerror()
             elif part == "cabin_living_room" or part == "cabin_1st_floor_bathroom" or part == "cabin_1st_floor_bedroom" or part == "cabin_kitchen":
-                if action in livingroomdict and isfloornumberaction < 2 and specificaction < 2:
+                if action in living_room_dict and isfloornumberaction < 2 and specificaction < 2:
                     if part != "cabin_living_room":
                         part = "cabin_living_room"
                         description = 1
                     else:
                         print("You are already in the " + action + ".")
-                elif action in bathroomdict and isfloornumberaction < 2 and specificaction < 2:
+                elif action in bathroom_dict and isfloornumberaction < 2 and specificaction < 2:
                     if part != "cabin_1st_floor_bathroom":
                         part = "cabin_1st_floor_bathroom"
                         description = 1
                     else:
                         print("You are already in the " + action + ".")
-                elif action in bedroomdict and isfloornumberaction < 2 and specificaction < 2:
+                elif action in bedroom_dict and isfloornumberaction < 2 and specificaction < 2:
                     if part != "cabin_1st_floor_bedroom":
                         part = "cabin_1st_floor_bedroom"
                         description = 1
@@ -1594,20 +1614,20 @@ class movement():
                 else:
                     gotoerror()
             elif part == "cabin_2nd_floor_bedroom_connecter":
-                if (isfloornumberaction < 2 and (action in livingroomdict or (action[:6] == "cabin " and action[6:] in livingroomdict))) or (isfloornumberaction == 1 and isjustfloornumberaction == 1) or action in gotodownstairsdict or "go downstairs" in actiontype:
+                if (isfloornumberaction < 2 and (action in living_room_dict or (action[:6] == "cabin " and action[6:] in living_room_dict))) or (isfloornumberaction == 1 and isjustfloornumberaction == 1) or action in gotodownstairsdict or "go downstairs" in actiontype:
                     part = "cabin_living_room"
                     description = 1
-                elif isfloornumberaction == 1 and action in bathroomdict:
+                elif isfloornumberaction == 1 and action in bathroom_dict:
                     part = "cabin_1st_floor_bathroom"
                     description = 1
-                elif isfloornumberaction == 1 and action in bedroomdict:
+                elif isfloornumberaction == 1 and action in bedroom_dict:
                     part = "cabin_1st_floor_bedroom"
                     description = 1
                 elif isfloornumberaction == 1 and action in kitchendict:
                     part = "cabin_kitchen"
                     description = 1
                 #TODO
-                # elif action in bathroomdict:
+                # elif action in bathroom_dict:
                     # part = "cabin_2nd_floor_bathroom"
                     # description = 1
                 elif action == "attic":
@@ -2084,7 +2104,7 @@ def dialog():
     
     if indialog == 1:
         if dialogpart == "rick_and_morty_apear_in_attic":
-            print(fill(indent("As you go to " + action2 + " the portal gun a green portal opens up behind you and an old man with spiky white hair and a labcoat holding a flask= and identical portal gun, along with a brown haired boy wearing a yellow t-shirt and blue pants, step through the portal into the room as it dissapears behind them.")))
+            print(fill(indent("As you go to " + action2 + " the portal gun a green portal opens up infront of you. A old man with spiky white hair and a labcoat holding a flask and identical portal gun steps though the portal. A brown haired boy wearing a yellow t-shirt and blue pants, follows into the room as the portal dissapears behind them.")))
             print("")
             print(fill("Rick: "))
             print(fill(indent("Hi name's Rick Sanchez. Me and my ill minded companion are going to have to confinscate that portal gun. Unless you want to be converted to a pile of dung goop.")))
