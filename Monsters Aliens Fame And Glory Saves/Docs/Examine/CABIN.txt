@@ -8,3 +8,9 @@ It seems odd that fireplace was lit before you got here.
 -table, dining table
 You notice a key on the table.
 
+
+
+cabin_1st_floor_bathroom:
+
+-shower
+The shower curtains appear to be closed. You can see a silhouette of a person behind the curtain.

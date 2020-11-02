@@ -1,0 +1,21 @@
+Examine:
+
+cavepart1:
+
+-light, feint light, glow, feint glow, glowing light
+The feint white light continues to grow brighter as you continue down the tunnel.
+
+-sulfur, smell of sulfur, smell sulfur, sulfur smell
+There is a smell of sulfur in the air coming from down the tunnel.
+
+
+
+cavepart2:
+
+-torch, flame, fire, light
+The wood burning torch seems to be perfectly block shaped and the flame is red with tiny white sparks flying off and little particles of smoke.
+
+-imp
+HP:
+Attack:
+Defence:

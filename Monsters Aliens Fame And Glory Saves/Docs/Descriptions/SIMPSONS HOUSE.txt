@@ -1,0 +1,6 @@
+Descriptions:
+
+simpsons_house_front:
+
+SIMPSONS HOUSE
+ You hop through the portal and arrive in front of house

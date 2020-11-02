@@ -31,3 +31,34 @@ cabin_living_room:
 
 CABIN
 In the living room there is a table in the middle and a lit fireplace.
+
+
+
+cabin_1st_floor_bathroom:
+
+BATHROOM
+  You enter the bathroom.
+
+
+
+cabin_2nd_floor_bedroom_connecter:
+
+-action in go_to_upstairs_dict
+CABIN
+  You go upstairs and come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, and a attic hatch on the ceiling.
+
+
+CABIN
+  You come to a hallway bedroom connecter. You notice several closed doors, a bedroom door, a bathroom door, a attic hatch on the ceiling as well as stairs to the main floor.
+
+
+
+cabin_attic:
+
+-printd = 1
+ATTIC
+  You are in the attic.
+
+
+ATTIC
+  You arrive in the attic.

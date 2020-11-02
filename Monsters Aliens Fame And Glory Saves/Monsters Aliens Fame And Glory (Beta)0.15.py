@@ -809,8 +809,16 @@ class descriptionstuff():
                 print('CAVE')
             elif part == "forestpart1" or part == "forestpart2":
                 print('FOREST')
-            elif part == "cabin_front" or part == "cabin_living_room" or part == "cabin_1st_floor_bathroom" or part == "cabin_1st_floor_bedroom" or part == "cabin_2nd_floor_bedroom_connecter" or part == "cabin_attic":
+                
+            elif part == "cabin_front" or part == "cabin_living_room" or part == "cabin_1st_floor_bedroom" or part == "cabin_2nd_floor_bedroom_connecter":
                 print('CABIN')
+            elif part == "cabin_1st_floor_bathroom":
+                print('BATHROOM')
+            elif part == "cabin_attic":
+                print('ATTIC')
+                
+            elif part == "simpsons_house_front":
+                print('SIMPSONS HOUSE')
             '''
             elif part == "cabin_living_room":
                 print('CABIN')
@@ -1236,7 +1244,7 @@ def examine():
             else:
                 print(fill("We don't know what you are trying to examine."))
                 
-        elif part == "cavepart2_r1":
+        elif part == "cavepart2":
             if action == "imp":
                 if enemiesalive["cavepart2_r1_imp"] == 1:
                     print(fill("HP: " + str(npc_stats["health_cavepart2_r1_imp"])))
@@ -2197,9 +2205,9 @@ def chooseadialog():
                 print(fill("""(You wonder how he knows that)"""))
                 print(fill(""))
                 print(fill(indent(""""First we *buuurrrbbbb* need to get some duff beeer because *urp* I'm nearly out of boose. It coincedently helps me think. Here hop in this *urp* portal." """)))
-                print(fill(""))      
-                dialogschosen.append(4)
-                dialogchoices()
+                print(fill(""))
+                part = "simpsons_house_front"
+                description = 1
             else:
                 print("That's not a valid option.")
         done = 1

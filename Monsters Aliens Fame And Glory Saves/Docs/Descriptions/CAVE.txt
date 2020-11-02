@@ -1,13 +1,22 @@
 Descriptions:
 
+mineshaft_entrance:
+
+CAVE
+  You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.
+
+
+
 cavepart1:
 
 CAVE
   You are now in the pitch black cave. You are surrounded by darkness, but there is a faint light coming from down the tunnel. The smell of sulfur has gotten stronger although their is now a new stench, it smells of decaying meat. If you decide to go further into the tunnel like cave, go west.
 
 
+
 cavepart2:
 
+-beento["cavepart2"] = 0
 CAVE
   As you continue further into the cave the potent smells continue to get stronger and stronger, however the light at the end of the tunnel proceeds to grow brighter. Eventually you come to a branching split in the cave where there are two tunnels, one to the left and one to the right.
 
