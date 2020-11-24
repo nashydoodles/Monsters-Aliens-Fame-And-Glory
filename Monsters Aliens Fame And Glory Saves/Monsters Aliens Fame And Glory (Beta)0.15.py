@@ -494,7 +494,7 @@ action2 = ""
 printd = 0
 description = 1
 generalpart = "base_universe"
-part = "cabin_front"
+part = "grassy_field"
 previouspart = []
 previouspart.append(part)
 done = 0
@@ -512,9 +512,9 @@ placesdiscovered = set([])
 placesdiscovered.add(part)
 printplacesdiscovered = ["Grassy Field"]
 
-inventory = {"cabin_key":1, "cabin_upstairs_bedroom_key":0, "water_bucket":1, "bucket":0, "unlit_torch":0, "lit_torch":0, "ladder":0, "portal_gun":1}
+inventory = {"cabin_key":0, "cabin_upstairs_bedroom_key":0, "water_bucket":1, "bucket":0, "unlit_torch":0, "lit_torch":0, "ladder":0, "portal_gun":0}
 
-lockeddoors = {"cabin_front_door":1, "cabin_attic_hatch":1}
+lockeddoors = {"cabin_front_door":1, "cabin_attic_hatch":0}
 changableobjects = {"lit_cabin_fireplace":1, "cabin_upstairs_bedroom_key_on_table":1, "ladder_on_side_of_cabin":1, "cabin_attic_ladder_placed":1}
 
 questlist = {"get_rick_duff_beer": 1, "get_bart_slingshot": 0, "get_bart_skateboard": 0}
@@ -910,7 +910,7 @@ class descriptionstuff():
                     if part == "cabin_attic" and printd == 1:
                         print(fill(indent('You are in the attic.')))
                     elif part == "cabin_attic":
-                        print(fill(indent('You arrive in the attic.')))
+                        print(fill(indent('You arrive in the attic and find what looks to be some kind of portal gun sitting in the corner.')))
                         
                     if part == "mineshaft_entrance":
                         print(fill(indent('You stand at the entrance to the mineshaft. All you can see is darkness, and you smell the strong stench of sulfur emanating from the cave.')))
@@ -1228,7 +1228,7 @@ def examine():
                 
         elif part == "cabin_front":
             if action in door_mat_dict:
-                00
+                print(fill("You can feel something small underneath the doormat after stepping all over it looking like an idiot."))
         elif part == "cabin_living_room":
             if action in fire_place_dict:
                 print(fill('It seems odd that fireplace was lit before you got here.'))
@@ -1656,7 +1656,7 @@ class movement():
                     # description = 1
                 elif action == "attic":
                     if changableobjects["cabin_attic_ladder_placed"] == 1 and lockeddoors["cabin_attic_hatch"] == 0:
-                        part = cabin_attic
+                        part = "cabin_attic"
                         description = 1
                     elif changableobjects["cabin_attic_ladder_placed"] == 1 and lockeddoors["cabin_attic_hatch"] == 1:
                         random_num = random.randint(1,2)
@@ -1788,6 +1788,13 @@ def dosomethingwithsomething():
     try_dict = set(["try"])
     unlock_dict = set(["unlock"])
     put_out_dict = set(["put out"])
+    
+    if action.find("look underneath") == 0 and action[15:16] in space_after_action_dict:
+        action = action[:10] + action[15:]
+    look_under_dict = set(["look under"])
+    door_mat_dict = set(["doormat", "door mat", "welcome mat", "boot rug"])
+    things_to_look_under_dict = set(list(door_mat_dict))
+    
     key_dict = set(["key"])
     water_bucket_dict = set(["bucket", "water bucket"])
     items_to_use_dict = set(list(key_dict) + list(water_bucket_dict))
@@ -1800,6 +1807,21 @@ def dosomethingwithsomething():
     itemtouse = ""
     useitemonaction = ""
     
+    if action.find("look under") == 0 and action[10:11] in space_after_action_dict:
+        action = action[11:]
+        actiontype = set(["look under"])
+        if action not in things_to_look_under_dict:
+            print("We don't know what your trying to look under.")
+        else:
+            if action in door_mat_dict:
+                if part == "cabin_front":
+                    print(fill("You find what looks to be the cabin front door key under the mat."))
+                    inventory["cabin_key"] = 1
+                    done = 1
+                    return
+                else:
+                    print("There's no " + action + " to look under here.")
+        
     if action.find("unlock") == 0 and action[6:7] in space_after_action_dict:
         action = action[7:]
         actiontype = set(["use item"])
@@ -1894,6 +1916,7 @@ def dosomethingwithsomething():
     '''
     if action == "unlock" or action == "unlock door" or action == "use key" or action == "use key on door" or action == "use key on cabin door":
     '''
+    
     if "use item" in actiontype:
         if itemtouse in key_dict:
             if useitemonaction in use_key_on_door_dict:
