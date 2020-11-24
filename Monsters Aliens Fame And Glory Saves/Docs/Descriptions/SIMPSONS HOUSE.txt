@@ -3,4 +3,14 @@ Descriptions:
 simpsons_house_front:
 
 SIMPSONS HOUSE
- You hop through the portal and arrive in front of house
+  You hop through the portal and arrive in front of a brown house.
+
+
+
+simpsons_house_entrance:
+
+SIMPSONS HOUSE ENTRANCE
+  
+
+
+

@@ -2,6 +2,10 @@ TODO, FIXME, XXX, HINT, TIP, @todo, HACK, BUG, OPTIMIZE, !!!, ???
 
 Things to add:
 
+lock picks
+
+Commands:
+-Try door
 
 Zork:
 
@@ -34,8 +38,6 @@ rick and forty portal gun in atic
 Dialog choices that lead to different response dialogs but same linear gameplay with easter eggs
 
 rick and morty doctor who crossover
-
-rick and morty simpsons dimension
 
 rick and morty family guy dimension crossover
 

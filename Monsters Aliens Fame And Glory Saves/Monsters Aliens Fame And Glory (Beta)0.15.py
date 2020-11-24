@@ -494,7 +494,7 @@ action2 = ""
 printd = 0
 description = 1
 generalpart = "base_universe"
-part = "grassy_field"
+part = "cabin_front"
 previouspart = []
 previouspart.append(part)
 done = 0
@@ -511,10 +511,14 @@ isjustfloornumberaction = 0
 placesdiscovered = set([])
 placesdiscovered.add(part)
 printplacesdiscovered = ["Grassy Field"]
+
 inventory = {"cabin_key":1, "cabin_upstairs_bedroom_key":0, "water_bucket":1, "bucket":0, "unlit_torch":0, "lit_torch":0, "ladder":0, "portal_gun":1}
-questlist = {"get_rick_duff_beer": 1, "get_bart_slingshot": 0, "get_bart_skateboard": 0}
+
 lockeddoors = {"cabin_front_door":1, "cabin_attic_hatch":1}
 changableobjects = {"lit_cabin_fireplace":1, "cabin_upstairs_bedroom_key_on_table":1, "ladder_on_side_of_cabin":1, "cabin_attic_ladder_placed":1}
+
+questlist = {"get_rick_duff_beer": 1, "get_bart_slingshot": 0, "get_bart_skateboard": 0}
+
 beento = {"grassy_field":0, "cavepart1":0, "cavepart2":0}
 enemiesalive = {"cavepart2_r1_imp": 1}
 npc_stats = {"health_cavepart2_r1_imp": 10, "attack_cavepart2_r1_imp": 2, "defence_cavepart2_r1_imp": 1}
@@ -680,7 +684,7 @@ def calculateactiontype():
     
     
     load_game_dict = set(["load game", "load"])
-    examine_dict = set(["examine", "x", "inspect", "describe", "check"])
+    examine_dict = set(["examine", "x", "inspect", "check"])
     tp_to_dict = set(["tp to", "tp"])
     enter_dict = set(["enter", "go inside", "go in"])
     leave_dict = set(["leave", "exit"])
@@ -770,6 +774,7 @@ class descriptionstuff():
         if "look around" in actiontype:
             if part == "cabin_front":
                 print(fill("There is a doormat on the front step."))
+                done = 1
     
     def printdescriptionaction():
         #Makes all the variables in the function global
@@ -1187,6 +1192,13 @@ def examine():
     global done
     global yesornoaction
     global npc_stats
+    
+    grass_dict = set(["grass", "field", "brush"])
+    door_mat_dict = set(["doormat", "door mat", "welcome mat", "boot rug"])
+    diner_table_dict = set(["diner_table", "table", "dining table", "supper_table"])
+    def examine_error():
+        print(fill("There isn't a " + action + " to examine here."))
+        
     #Determines if the action is a examine command
     '''
     if ("examine" in action) or (action.find("x") == 0) or ("describe" in action):
@@ -1207,24 +1219,28 @@ def examine():
     '''
     if "examine" in actiontype:
         if part == "grassy_field":
-            if action == "grass" or action == "field" or action == "brush":
+            if action in grass_dict:
                 print(fill("There seems to be purple particles emanating from the grass."))
             elif action in mineshaft_dict:
                 print(fill("You would have to get closer to see it."))
             else:
-                print(fill("We don't know what you are trying to examine."))
+                examine_error()
+                
+        elif part == "cabin_front":
+            if action in door_mat_dict:
+                00
         elif part == "cabin_living_room":
             if action in fire_place_dict:
                 print(fill('It seems odd that fireplace was lit before you got here.'))
-            elif action == "table" or action == "dining table":
+            elif action in diner_table_dict:
                 print(fill("You notice a key on the table."))
             else:
-                print(fill("We don't know what you are trying to examine."))
+                examine_error()
         elif part == "cabin_1st_floor_bathroom":
             if action == "shower":
                 print(fill("The shower curtains appear to be closed. You can see a silhouette of a person behind the curtain."))
             else:
-                print(fill("We don't know what you are trying to examine."))
+                examine_error()
         elif part == "cavepart1":
             if action == "light" or action == "feint light" or action == "glow" or action == "feint glow" or action == "glowing light":
                 if paratype == 1:
@@ -1234,7 +1250,7 @@ def examine():
             elif action == "sulfur" or action == "smell of sulfur" or action == "smell sulfur" or action == "sulfur smell":
                 print(fill("There is a smell of sulfur in the air coming from down the tunnel."))
             else:
-                print(fill("We don't know what you are trying to examine."))
+                examine_error()
         elif part == "cavepart2":
             if action == "torch" or action == "flame" or action == "fire" or action == "light":
                 if paratype == 1:
@@ -1242,7 +1258,7 @@ def examine():
                 if paratype == 2:
                     print(" The wood burning torch seems to be perfectly block shaped and the flame is red with tiny white sparks flying off and little particles of smoke.")
             else:
-                print(fill("We don't know what you are trying to examine."))
+                examine_error()
                 
         elif part == "cavepart2":
             if action == "imp":
@@ -1769,6 +1785,7 @@ def dosomethingwithsomething():
     global questlist
     
     use_dict = set(["use"])
+    try_dict = set(["try"])
     unlock_dict = set(["unlock"])
     put_out_dict = set(["put out"])
     key_dict = set(["key"])
@@ -2526,24 +2543,7 @@ def listplaces():
 
 def listquests():
     #Makes all the variables in the function global
-    global action
-    global action2
-    global part
-    global placesdiscovered
-    global printplacesdiscovered
-    global description
     global done
-    global yesornoaction
-    global dialogcharacter
-    global dialogpart
-    global dialogspecificpart
-    global indialog
-    global choosedialog
-    global healthpoints
-    global attackpoints
-    global defencepoints
-    global questlist
-    
     if action == "list quests":
         print("Quests:")
         if "simpsons_house" in placesdiscovered:
@@ -2580,6 +2580,8 @@ while True:
         calculateactiontype()
     if done == 0:
         chooseadialog()
+    if done == 0:
+        look_around_action()
     if done == 0:
         printdescriptionaction()
     if done == 0:
