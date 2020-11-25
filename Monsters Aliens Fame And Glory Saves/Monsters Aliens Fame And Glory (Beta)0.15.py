@@ -2630,7 +2630,7 @@ while True:
     if done == 0:
         #Calls the move function
         move()
-    if done == 0:
+    if done == 0:                                                                                                                                                                                           
         #Calls the leftright function
         leftright()
     if done == 0:

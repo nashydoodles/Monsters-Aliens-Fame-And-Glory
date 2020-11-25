@@ -1,5 +1,12 @@
 Examine:
 
+cabin_front:
+
+-door_mat_dict
+You can feel something small underneath the doormat after stepping all over it looking like an idiot.
+
+
+
 cabin_living_room:
 
 -fire_place_dict
