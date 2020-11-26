@@ -1226,6 +1226,7 @@ def examine():
             else:
                 examine_error()
                 
+                
         elif part == "cabin_front":
             if action in door_mat_dict:
                 print(fill("You can feel something small underneath the doormat after stepping all over it looking like an idiot."))
@@ -1241,6 +1242,8 @@ def examine():
                 print(fill("The shower curtains appear to be closed. You can see a silhouette of a person behind the curtain."))
             else:
                 examine_error()
+                
+                
         elif part == "cavepart1":
             if action == "light" or action == "feint light" or action == "glow" or action == "feint glow" or action == "glowing light":
                 if paratype == 1:
